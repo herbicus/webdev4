@@ -1,0 +1,636 @@
+/* - @font-face
+========================
+*/
+
+
+@font-face {
+  font-family: 'lato-black';
+  src: url('../fonts/lato-black/Lato-Bla-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-black/Lato-Bla-webfont.woff') format('woff'), 
+       url('../fonts/lato-black/Lato-Bla-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-black/Lato-Bla-webfont.svg#Lato-Bla-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-regular';
+  src: url('../fonts/lato-regular/Lato-Reg-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-regular/Lato-Reg-webfont.woff') format('woff'), 
+       url('../fonts/lato-regular/Lato-Reg-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-regular/Lato-Reg-webfont.svg#Lato-Reg-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-light';
+  src: url('../fonts/lato-light/Lato-Lig-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-light/Lato-Lig-webfont.woff') format('woff'), 
+       url('../fonts/lato-light/Lato-Lig-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-light/Lato-Lig-webfont.svg#Lato-Lig-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-light-italic';
+  src: url('../fonts/lato-light-italic/Lato-LigIta-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.woff') format('woff'), 
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.svg#Lato-Reg-webfont') format('svg');
+}
+
+
+body, html {
+  height: 100%;
+  font-family: 'lato-regular';
+  background: transparent;
+  background: #2a83c5;
+  background: #000;
+  text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3 {
+  font-family: 'lato-black';
+}
+
+h4,h5,h6,p {
+  font-family: 'lato-regular';
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.large-12, .columns, .large-6, .medium-6,
+.large-4, .medium-4, .small-4, .small-2,
+.small-10, .small-9 {
+  border: 1px solid #000;
+  background: transparent;
+  border-style: none;
+  /*padding: 0;*/
+  /*margin: 0;*/
+}
+
+.panel {
+  background: rgba(153, 153, 153, .5);
+  -webkit-box-shadow: 0px 0px 1px 1px #999, 0px 0px 3px 3px rgba(153, 153, 153, .5);
+          box-shadow: 0px 0px 1px 1px #999, 0px 0px 3px 3px rgba(153, 153, 153, .5);
+  
+}
+
+.panel.callout {
+  /*opacity: 1;*/
+  background-color: rgba(0, 0, 0, 0.55);
+  border-style: none;
+  
+}
+
+.panel.callout h2, .panel.callout p,
+.panel.callout a {
+  color: #fff;
+}
+
+.buttonz {
+  width: 100px;
+  height: 50px;
+  padding: 1%;
+  color: #FFF;
+  background: blue;
+  text-align: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.call h5 {
+  text-shadow:  0px 5px 5px blue;
+}
+
+.hero {
+  width: 20%;
+  max-width: 20%;
+  padding-bottom: 1%;
+}
+
+/*  STYLE THE BG FOR NAV HERE */
+.top-bar-section li:not(.has-form) a:not(.button) {
+  background: #2a83c5;
+}
+
+.top-bar {
+  background: #2a83c5;
+}
+
+.top-bar-section img {
+  width: 25%;
+  max-width: 25%;
+}
+
+.top-bar-section {
+  background: transparent;
+}
+
+.contain-to-grid {
+  background: #2a83c5;
+}
+
+/* !!!!! STYLE H-1 LOGO HERE !!!!!!!!!!!!! */
+.top-bar .name h1 a {
+font-weight: normal;
+color: white;
+width: 60%;
+display: block;
+padding: 20%;
+text-indent: -9999px;
+background: url(../img/chevron_logo-x.png)no-repeat left;
+-webkit-background-size: contain;
+     -o-background-size: contain;
+        background-size: contain;
+}
+
+.top-bar .name h1 a:hover {
+  opacity: 0.5;
+}
+
+.level {
+  margin-top: 10%;
+}
+
+.levelz {
+  margin-top: 5%;
+}
+
+.display {
+  display: block;
+}
+
+dialog > :first-child, .reveal-modal > :first-child {
+  color: #FFF;
+  background: black;
+}
+
+dialog.medium, .reveal-modal.medium {
+  background: black;
+}
+
+/*==========================================*/
+
+
+/* ================= TOP WATER SECTION =============================*/
+
+.water-top {
+  background: url(../img/bg-top.png)no-repeat center center;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+.water-top h3{
+  font-family: 'lato-light-italic';
+  color: #FFF;
+}
+
+.water-top h2{
+  font-family: 'lato-light-italic';
+  color: #FFF;
+}
+
+/*  UNDER NAV BAR WATER PART  */
+
+.water-bottom {
+  background: url(../img/water-bottom.jpg)no-repeat center center;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  height: 100%;
+  border-bottom: 10px solid black;
+  font-style: italic;s
+}
+
+.water-bottom h5,.water-bottom h4 {
+  letter-spacing: 2px;
+  color: #FFF;
+  font-family: 'lato-light-italic';
+  text-shadow:  0px 5px 5px blue;
+}
+
+.mobile-text {
+  display: none;
+}
+
+.mobile-text h2,.mobile-text h3 {
+  color: #FFF;
+  font-family: 'lato-light-italic';
+  text-shadow:  0px 5px 5px blue;
+}
+
+.mobile-text img {
+  width: 50%;
+  max-width: 50%;
+}
+
+
+.water-icon {
+  background-color: rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  padding: 2%;
+  margin-bottom: 5%;
+  -webkit-animation: spin 3s infinite;
+     -moz-animation: spin 1s infinite;
+      -ms-animation: spin 1s infinite;
+       -o-animation: spin 1s infinite;
+          animation: spin 1s infinite;
+}
+
+/*  PARRALLAX TURTLE */
+#parallax {
+  width: 100%;
+  position: fixed;
+  top: 75px;
+  left: 50px;
+}
+
+#parallax img{
+  width: 25%;
+  position: relative;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(180deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@-o-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(180deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(180deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(180deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+/* ================= END TOP WATER SECTION =============================*/
+
+/* ================= SECTION 1 =============================*/
+
+.section-1 {
+  background: url(../img/section1-bg.jpg)no-repeat center right;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  /*background: #FFF;*/
+  height: 100%;
+}
+
+/* ================= END SECTION 1 =============================*/
+
+/* ================= SECTION 2 =============================*/
+
+.section-2 {
+  background: #91C46C;
+  color: #FFF;
+  background: url(../img/section2-bg.jpg)no-repeat center left;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  height: 100%;
+}
+
+.section-2 h2 {
+  color: #FFF;
+}
+
+/* =================  END SECTION 2 =============================*/
+
+/* ================= SECTION 3 =============================*/
+
+.section-3 {
+  background: #287D7D;
+  color: #FFF;
+  background: url(../img/section3-bg.jpg)no-repeat center center;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  height: 100%;
+}
+
+/* ================= END SECTION 3 =============================*/
+
+/* ================= SECTION 4 =============================*/
+
+.section-4 {
+  background: #C6E070;
+  background: url(../img/section4-bgx.jpg)no-repeat center center;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  height: 100%;
+}
+
+/* ================= END SECTION 4 =============================*/
+
+video {
+  padding: 1%;
+}
+
+footer {
+  height: 100px;
+  background: #ccc;
+}
+
+
+
+/*<===================== CONTENT ======================>*/
+
+/* =========== ACCORDION STYLING ===============*/
+.squeezhead {
+  background: #c2c2c2;
+  background: transparent;
+  padding: 6px;
+  color: #3481a3;
+  position: relative;
+  cursor: pointer;
+}
+.squeezhead:hover {
+  opacity: 0.75;
+}
+
+.squeezhead p {
+  font-weight: bold;
+  margin: 5px 15px;
+}
+.squeezhead .icon-arrow-right {
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  transition: all 0.7s;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  font-size: 1.5em;
+  display: inline-block;
+  top: 13px;
+  right: 15px;
+  position: absolute;
+}
+.squeezecnt {
+  background: #BFC4C5;
+  background: #000;
+  padding: 20px;
+}
+.squeezecnt p {
+  margin: 0;
+  color: #FFF;
+}
+
+.squeezecnt p .headline{
+  text-decoration: underline;
+  font-variant: small-caps;
+  font-style: bold;
+}
+
+
+/* =========== END ACCORDION STYLING ===============*/
+
+/* =========== GRAPH STYLING ===============*/
+
+#chart {
+  width: 650px;
+  height: 300px;
+  margin: 30px auto 0;
+  display: block;
+}
+#chart #numbers {
+  width: 50px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+}
+#chart #numbers li {
+  text-align: right;
+  padding-right: 1em;
+  list-style: none;
+  height: 29px;
+  border-bottom: 1px solid #444;
+  position: relative;
+  bottom: 30px;
+}
+#chart #numbers li:last-child {
+  height: 30px;
+}
+#chart #numbers li span {
+  color: #eee;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+#chart #bars {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  width: 26em;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 1px #444;
+}
+#chart #bars li {
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+#chart #bars li .bar {
+  display: block;
+  width: 70px;
+  margin-left: 15px;
+  background: #49E;
+  position: absolute;
+  bottom: 0;
+}
+#chart #bars li .bar:hover {
+  background: #5AE;
+  cursor: pointer;
+}
+#chart #bars li .bar:hover:before {
+  color: white;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+#chart #bars li span {
+  color: #eee;
+  width: 100%;
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  text-align: center;
+}
+
+#chart {
+  display: none;
+}
+
+#bars h4{
+  color: #FFF;
+  font-family: 'lato-light';
+  text-shadow:  0px 5px 5px blue;
+  
+}
+
+/* water manage graph*/
+#chartz {
+  width: 650px;
+  height: 300px;
+  margin: 30px auto 0;
+  display: block;
+}
+#chartz #numbersz {
+  width: 50px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+}
+#chartz #numbersz li {
+  text-align: right;
+  padding-right: 1em;
+  list-style: none;
+  height: 29px;
+  border-bottom: 1px solid #444;
+  position: relative;
+  bottom: 30px;
+}
+#chartz #numbersz li:last-child {
+  height: 30px;
+}
+#chartz #numbersz li span {
+  color: #eee;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+#chartz #barsz {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  width: 26em;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 1px #444;
+}
+#chartz #barsz li {
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+#chartz #barsz li .barz {
+  display: block;
+  width: 70px;
+  margin-left: 15px;
+  background: #49E;
+  position: absolute;
+  bottom: 0;
+}
+#chartz #barsz li .barz:hover {
+  background: #5AE;
+  cursor: pointer;
+}
+#chartz #barsz li .barz:hover:before {
+  color: white;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+#chartz #barsz li span {
+  color: #eee;
+  width: 100%;
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  text-align: center;
+}
+
+#chartz {
+  display: none;
+}
+
+#barsz h4{
+  color: #FFF;
+  font-family: 'lato-light';
+  text-shadow:  0px 5px 5px blue;
+  
+}
+
+#water-bar {
+  background: red;
+}
+
+/* =========== END GRAPH STYLING ===============*/
+
+/* Mobile */
+@media screen and (max-width: 640px) {
+  .water-top,.call h5,.call h4{
+    display: none;
+  }
+
+  .top-bar .name h1 a {
+    background: url(../img/chevron_logo.png)no-repeat left;
+    -webkit-background-size: contain;
+         -o-background-size: contain;
+            background-size: contain;
+    }
+
+  .mobile-text {
+    display: block;
+  }
+
+  .section-1,.section-2 {
+    margin-top: 0;
+    padding-bottom: 2%;
+  }
+
+  
+}
+
+/*  Desktop  */
+@media screen and (min-width: 1400px) {
+  
+  .water-bottom,.water-top,
+  .section-1, .section-2,
+  .section-3, .section-4 {
+    height: 70%;
+  }
+
+  .level {
+    margin-top: 25%;
+    padding-bottom: 1%;
+  }
+
+  .call h4 {
+    margin-top: -32%;
+  }
+}
+
+
+/*<====================== END CONTENT ===================>*/
+

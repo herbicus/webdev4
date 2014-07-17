@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
+<link  rel="stylesheet" href="demo_files/css/style.css">
+<!--[if lt IE 9]>
+	      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+	  <![endif]-->
+<title>jQuery Squeezebox.js Plugin Demos</title>
+</head>
+<body>
+<h1>jQuery Squeezebox.js Plugin Demos</h1>
+<div class="jquery-script-ads" align="center"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="wrap">
+<div class="page_content">
+<h3> Minimal usage </h3>
+<section class="accordion-1">
+<header class="squeezhead">
+<p>Click me</p>
+</header>
+<div class="squeezecnt">
+<p>You clicked me.</p>
+</div>
+<header class="squeezhead">
+<p>Hit me</p>
+</header>
+<div class="squeezecnt">
+<p>Ouch!</p>
+</div>
+<header class="squeezhead">
+<p>Toggle me</p>
+</header>
+<div class="squeezecnt">
+<p>Here I am.</p>
+</div>
+<header class="squeezhead">
+<p>Press me</p>
+</header>
+<div class="squeezecnt">
+<p>This is just a default accordion...scroll for more options!</p>
+</div>
+</section>
+<h3> Advanced usage</h3>
+<p> Even though the plugin comes with out-of-the-box, predefined classes for both the headers and the togglable content by no means you are bound to use those. Just pass them as options of the plugin. </p>
+<p> In the following example we're also defining a different speed of the opening/closing animation. Another option passed makes sure that open folders are not automatically closed when a new one is opened. </p>
+<section class="accordion-2">
+<header class="squeezhead">
+<p>We open</p>
+</header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>A little</p>
+</header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>Bit faster</p>
+</header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>Then the others</p>
+</header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+</section>
+<code class="with-arrow-up"> $('.accordion-2').squeezebox({ <br>
+&nbsp;closeOthers: false, <br>
+&nbsp;timing: 300 <br>
+}); </code>
+<h3 id="callbacks"> Accordion with callbacks </h3>
+<p> Along with the set of option shown above the plugin offers two different callbacks you can hook to. One is fired when opening a folder, the other when closing it. Both expose the whole object created at init time. This allows for easy accessing to the elements such as the headers and the folders so we can toggle classes when the accordion is used. </p>
+<section class="accordion-3">
+<header class="squeezhead">
+<p>Nice arrows</p>
+<span class="icon-arrow-right"></span> </header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>Header #2</p>
+<span class="icon-arrow-right"></span> </header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>Header #3</p>
+<span class="icon-arrow-right"></span> </header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+<header class="squeezhead">
+<p>Header #4</p>
+<span class="icon-arrow-right"></span> </header>
+<div class="squeezecnt">
+<p>your content here</p>
+</div>
+</section>
+<code class="with-arrow-up"> $('.accordion-3').squeezebox({ <br>
+&nbsp; <span class="comment">// make sure you pass the element (el) <br>
+&nbsp;  // as a parameter so you <br>
+&nbsp; // can gain acces to it </span><br>
+&nbsp;&nbsp;onOpen: function(el){ <br>
+&nbsp;&nbsp;&nbsp;el.clickedEl.addClass('accordion_open'); <br>
+&nbsp;}, <br>
+&nbsp;&nbsp;onClose: function(el){ <br>
+&nbsp;&nbsp;&nbsp;el.clickedEl.removeClass('accordion_open'); <br>
+&nbsp;} <br>
+}); </code>
+
+</div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script type="text/javascript" src="squeezebox.js"></script> 
+<script>
+
+		$('.accordion-1').squeezebox();
+
+
+		$('.accordion-2').squeezebox({
+			closeOthers: false,
+			timing: 300
+		});
+
+		$('.accordion-3').squeezebox({
+			onOpen: function(el){
+				el.clickedEl.addClass('accordion_open');
+			},
+			onClose: function(el){
+				el.clickedEl.removeClass('accordion_open');
+			}			
+		});
+	</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
