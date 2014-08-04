@@ -1,0 +1,35 @@
+// -------------------------------------
+//   Base
+// -------------------------------------
+// ----- Base-level tags (body, p, etc.)
+// -------------------------------------
+
+a {
+  color: #000;
+  text-decoration: none;
+  @include transition (all .3s ease-in-out);
+  &:hover {
+	  cursor: pointer; 
+	  color: #FF6146;
+	  text-decoration: underline;
+	}
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+// LISTS
+
+ol.default {
+	@extend %default-ol;
+}
+
+ul.default {
+	@extend %default-ul;
+}

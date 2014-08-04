@@ -1,0 +1,448 @@
+// -------------------------------------
+//   Layout
+// -------------------------------------
+// ----- Margin, Padding, and General Sizing of Main Containers
+// -------------------------------------
+
+
+html,
+body {
+  font-size: 100%;
+  width: 100%;
+  height: 100%; 
+}
+
+body {
+  background: white;
+  color: #222222;
+  padding: 0;
+  margin: 0;
+  font-family: "Gill Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  cursor: default;
+  line-height: 2em;
+}
+
+.columns {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  float: left; 
+}
+
+.section-border {
+  width: 59%;
+  border-top: 1px dotted black;
+  border-bottom: 1px dotted black;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 17%;
+  h3 {
+  	color: #80726B;
+  	font: 1.17em;
+  	font-family: "lato-light";
+  	line-height: 2em; 
+  }
+
+  p {
+  	color: #80726B;
+  	font: 1.17em;
+  	font-family: "lato-light"; 
+  }
+
+  h5 {
+  	color: #80726B;
+  	font-family: "lato-light";
+  	line-height: 2em; 
+  }
+}
+
+.banner-btn {
+	@include fade-hover;
+}
+
+.social-btn {
+	margin-top: 1em; 
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 3px;
+}
+
+
+// SIMPLIFIED GRID
+
+.row { 
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	// max-width: 62.5rem;
+	max-width: 68.125em; 
+	*zoom: 1;
+	
+	@include row();
+	@include outer-container;
+	@include mq(iphone) {
+		max-width: 320px;
+	}
+	@include mq(android) {
+		max-width: 480px;
+	}
+	@include mq(tablet) {
+		max-width: 768px;
+	}
+	@include mq(laptop) {
+		max-width: 960px;
+	}
+	@include mq(desktop) {
+		max-width: 1280px;
+	}
+}
+
+.full-width {
+	@include span-columns(12);
+ }
+
+.col-two { 
+	@include span-columns(6);
+	@include media(min-width 320px max-width 480px, 6) {
+    	@include span-columns(6);
+	}
+}
+
+.col-three { 
+	@include span-columns(4);
+	@include media(min-width 320px max-width 480px, 6) {
+    	@include span-columns(6);
+	}
+}
+
+.fourth { 
+	@include span-columns(3);
+	@include media(min-width 320px max-width 480px, 6) {
+    	@include span-columns(6);
+  }
+}
+
+.sixth { 
+	@include span-columns(2);
+	@include media(min-width 320px max-width 480px, 6) {
+    	@include span-columns(6);
+	}
+}
+
+.one { 
+	@include span-columns(1);
+	@include media(min-width 320px max-width 480px, 6) {
+		@include span-columns(6);
+
+	}
+}
+
+// --------------------------------------------------------//
+//   =----------------MAIN CONTENT----------------------=
+// --------------------------------------------------------//
+
+// -------------------------------------
+//   Header
+// -------------------------------------
+
+header {
+  background: #F3614C;
+  margin-bottom: 2em;
+  p {
+    font-family: "lato-bold"; 
+  }
+
+  nav {
+    z-index: 1;
+    position: absolute; 
+    img {
+      @include fade-hover;
+    }
+  } 
+
+  // MOBILE NAV MENU BUTTON
+  .col-two {
+    margin: 1%;
+    h3 {
+      padding-left: 2%;
+      font-family: "lato-light-italic";
+      color: $cream; 
+    }
+    button {
+      @include fade-hover;
+      margin-right: 2%;
+      background: $cream;
+      color: $charcoal;
+    }
+     
+    display: none;
+  }
+
+  @include media(min-width 320px max-width 760px, 6) {
+    .full-width {
+      display: none;
+    }
+
+    .col-two {
+      display: block;
+    }
+
+    nav {
+      display: block;
+    }
+  }
+}
+
+.l-header-logo {
+  width: 33.33333%; 
+  margin: 2.5em 0 2.5em 0;
+  @include grayscale-hover;
+}
+
+.l-header-text {
+/*  width: 66.66667%;*/
+  width: 53.66667%;
+  margin: 0 auto;
+  margin-right: 8%;
+}
+
+
+
+nav {
+  height: 50px;
+  background: #000;
+  border: 1px solid black;
+  width: 100%;
+  img {
+    margin-bottom: -3em; 
+  }
+  ul {
+    li {
+      display: inline-block;
+      padding: 0 3% 0 3%;
+      border-left: dotted 1px white;
+      &:last-child {
+        border-right: dotted 1px white; 
+      }
+      a {
+        color: $porkyWhite; 
+      }
+    }
+  }
+}
+
+//
+// -------------------------------------
+// -------------------------------------
+
+// -------------------------------------
+//   Body
+// -------------------------------------
+
+// SECTION-1
+.section-1 .section-border {
+  line-height: 15px;
+  margin-left: 17%;
+  width: 64%;
+}
+
+.l-mtv {
+  background: #9CCBAA;
+  height: 29em;
+  margin-bottom: 1em;
+  /*width: 70%;*/
+  h4 {
+    padding-top: 1em;
+  }
+}
+
+.l-mtv-logo {
+  @include background-image(url("../section-1-work/mtv-logo.png"), url("../section-1-work/mtv-logo.png"));
+  @include background-contain;
+  height: 10em;
+  margin-top: 7em;
+}
+
+.l-mtv-zappo {
+  @include background-image(url("../section-1-work/zappos-left.png"), url("../section-1-work/zappos-left.png"));
+  @include background-contain;
+  height: 28em;
+}
+
+.l-mtv-delvale {
+  @include background-image(url("../section-1-work/delvale-middle.png"), url("../section-1-work/delvale-middle.png"));
+ @include background-contain;
+  height: 28em;
+}
+
+.l-mtv-mono {
+  @include background-image(url("../section-1-work/monotype-right.png"), url("../section-1-work/monotype-right.png"));
+  @include background-contain;
+  height: 28em;
+}
+
+.l-mtv-zappo, .l-mtv-delvale, .l-mtv-mono {
+  @include transition (all .3s ease-in-out);
+  -webkit-filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.l-mtv-zappo:hover, .l-mtv-delvale:hover, .l-mtv-mono:hover {
+  -webkit-filter: grayscale(0);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.section-1-button {
+  background: #FFCD0F;
+  padding: 1em 10% 1em 10%;
+  font-family: "lato-regular";
+}
+
+// SECTION-2
+.section-2{
+  p {
+    font-family: "lato-bold";
+  }
+  .section-border {
+    line-height: 15px;
+    margin-left: 17%;
+    width: 70%;
+    margin-top: 5em;
+    padding-bottom: 1em;
+  }
+  .col-three {
+    padding: 0;
+    p {
+      letter-spacing: -1px;
+      line-height: 20px;  
+    } 
+  }
+}
+.news-btn {
+  margin-top: 3em;
+}
+
+.l-webby {
+  margin-bottom: 1em; 
+}
+
+// SECTION-3
+.section-3 .section-border {
+  line-height: 15px;
+  margin-left: 17%;
+  width: 70%;
+  margin-top: 5em;
+  padding-bottom: 1em;
+}
+
+.l-three-top {
+  @include background-image(url("../section-3-blog/pic-left.png"), url("../section-3-blog/pic-left.png"));
+  @include background-contain;
+  height: 20em;
+  margin-top: 1em;
+}
+
+.blog-btn {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+
+// SECTION-4
+.l-four-image {
+  @include background-image(url("../section-4-about/pic.png"), url("../section-4-about/pic.png"));
+  @include background-contain;
+  height: 25em;
+}
+
+
+// SECTION-5
+.section-5 img {
+  margin-right: 5%;
+}
+
+// SECTION-6
+.section-6 .section-border {
+  line-height: 15px;
+  margin-left: 17%;
+  width: 70%;
+  margin-top: 5em;
+  padding-bottom: 1em;
+}
+
+//
+// -------------------------------------
+// -------------------------------------
+
+// -------------------------------------
+//   Footer
+// -------------------------------------
+
+footer {
+  background: #F3614C;
+  height: 30em;
+  border-bottom: 10px solid white;
+  p {
+    font-style: "lato-light";
+    margin-top: 1em; 
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      color: #FFF; 
+    } 
+  }
+  h3 {
+    line-height: 0;
+    height: 2em; 
+  }
+  h6 {
+    margin-top: 1em;
+  } 
+}
+
+form {
+  background: #FFF;
+  padding: 1em;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
+  // width: 53%;
+  margin-top: 2em;
+  margin-left: 25%;
+}
+
+.bottom-footer {
+  background: #202020;
+  height: 60px;
+  color: #fff;
+}
+
+.footer-btn {
+  margin-top: 2em;
+}
+
+input[type="text"] {
+  width: 75%; 
+}
+
+.form-btn {
+  padding: 2px 5px 2px 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  margin: 0 1em 0 1em;
+  background: #FFCD0F;
+  margin-top: 3em;
+}
+
+//
+// -------------------------------------
+// -------------------------------------
+
+
+

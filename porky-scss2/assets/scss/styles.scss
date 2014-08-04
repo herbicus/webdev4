@@ -1,0 +1,92 @@
+// IMPORT BOURBON
+
+@import "bourbon/bourbon";
+@import "bitters/base";
+@import "neat/neat";
+
+// -------------------------------------
+//   Core
+// -------------------------------------
+
+// ----- Settings - @Font-Face Declarations, Variables ----- //
+@import "settings";
+
+// ----- Helpers - Extends, Functions, and Mixins ----- //
+@import "helpers";
+
+// ----- Base - Base-level tags (body, p, etc.) ----- //
+@import "base";
+
+// ----- Typography - Fonts and Colors ----- //
+@import "typography";
+
+// ----- Skin - Backgrounds, Borders, Box-shadow, etc ----- //
+@import "skin";
+
+// ----- Layout - Margin, Padding, Sizing ----- //
+@import "layout";
+
+
+// -------------------------------------
+//   Inbox 
+// -------------------------------------
+// ----- The inbox allows developers, and those not actively working on the CSS, 
+// to quickly add styles that are easily seen by the maintainer of the file.
+
+.l-header-logo {
+  width: 33.33333%; 
+  margin: 2.5em 0 2.5em 0;
+  @include grayscale-hover;
+}
+
+nav {
+  height: 50px;
+  background: #000;
+  border: 1px solid black;
+  width: 100%;
+  img {
+    margin-bottom: -3em; 
+  }
+  ul {
+    li {
+      display: inline-block;
+      padding: 0 3% 0 3%;
+      border-left: dotted 1px white;
+      &:last-child {
+        border-right: dotted 1px white; 
+      }
+      a {
+        color: $porkyWhite; 
+      }
+    }
+  }
+}
+
+// -------------------------------------
+// -------------------------------------
+
+
+// -------------------------------------
+//   Shame 
+// -------------------------------------
+// ----- Need to add a quick fix, hack, or questionable technique?  Add it here, fix it later.
+
+@media only screen and (max-width: 767px){
+  .columns {
+    width: 100%;
+    display: block;
+  }
+
+  .banner-btn {
+  width: 75%;
+  height: 0 auto;
+  }
+
+  .section-border {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+// -------------------------------------
+// -------------------------------------

@@ -1,0 +1,150 @@
+// -------------------------------------
+//   Typography
+// -------------------------------------
+// ----- Fonts and Colors
+// -------------------------------------
+
+$porkyBlue: #3694A7;
+$porkyRed: #FF6146;
+$porkyGrey: #A4A1A1;
+$porkyWhite: #fff;
+$porkyYellow: #FFCD0F;
+
+.porky-blue {
+  color: $porkyBlue;
+  font-family: "lato-regular";
+}
+
+.porky-red {
+  color: $porkyRed;
+}
+
+.porky-grey {
+  color: $porkyGrey;
+}
+
+.porky-white {
+  color:porkyWhite;
+}
+
+// -------------------------------------
+//   Header
+// -------------------------------------
+
+@font-face {
+  font-family: 'lato-black';
+  src: url('../fonts/lato-black/Lato-Bla-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-black/Lato-Bla-webfont.woff') format('woff'), 
+       url('../fonts/lato-black/Lato-Bla-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-black/Lato-Bla-webfont.svg#Lato-Bla-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-regular';
+  src: url('../fonts/lato-regular/Lato-Reg-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-regular/Lato-Reg-webfont.woff') format('woff'), 
+       url('../fonts/lato-regular/Lato-Reg-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-regular/Lato-Reg-webfont.svg#Lato-Reg-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-light';
+  src: url('../fonts/lato-light/Lato-Lig-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-light/Lato-Lig-webfont.woff') format('woff'), 
+       url('../fonts/lato-light/Lato-Lig-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-light/Lato-Lig-webfont.svg#Lato-Lig-webfont') format('svg');
+}
+
+@font-face {
+  font-family: 'lato-light-italic';
+  src: url('../fonts/lato-light-italic/Lato-LigIta-webfont.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.woff') format('woff'), 
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.ttf')  format('truetype'),
+       url('../fonts/lato-light-italic/Lato-LigIta-webfont.svg#Lato-Reg-webfont') format('svg');
+}
+
+h1 {
+  font-family: "lato-light";
+  font-size: 2em;
+  margin: 0.67em 0;
+   
+}
+
+h2,h3,h4,
+h5,h6, p {
+  font-family: 'lato-regular';
+}
+
+h5, h6 {
+	font-family: "lato-light";
+}
+
+.section-4 h5, .section-4 p{
+	font-family: "lato-light"; 
+}
+
+// h6 {
+// 	line-height: 1.75em; 
+// }
+
+/* BUTTON COLOR */
+.porky-yellow {
+  color: $porkyYellow;
+}
+
+div.arrow-ribbon {
+  display: inline-block;
+  color: $porkyWhite;
+  font-size: 22px;
+  line-height: 38px;
+  margin: 15px 0;
+  position: relative;
+  width: 200px;
+}
+
+/*div.arrow-ribbon:before {
+  border-color: #FFCD0F transparent;
+  left: -19px;
+}
+
+div.arrow-ribbon:after, .arrow-ribbon:before {
+  border-width: 19px 0 19px 19px;
+}*/
+
+/*div.arrow-ribbon {
+  background-color: #FFCD0F;
+}
+
+div.arrow-ribbon:after,
+div.arrow-ribbon:before {
+  border-width: 19px 0 19px 19px;
+}
+
+div.arrow-ribbon:before {
+  border-color: #FFCD0F transparent;
+  left: -19px;
+  border-width: 19px 0 19px 19px;
+}
+
+div.arrow-ribbon:after {
+  border-color: transparent #FFCD0F;
+  right: -19px;
+  border-width: 19px 0 19px 19px;
+}*/
+
+span {
+  background: #FFCD0F;
+  color: #000;
+  padding: 1%;
+  font-size: 1em;
+}
+
+
+// -------------------------------------
+//   Main-Content
+// -------------------------------------
+
+
+// -------------------------------------
+//   Footer
+// -------------------------------------
