@@ -1,0 +1,153 @@
+// -------------------------------------
+//   Typography
+// -------------------------------------
+// ----- Fonts and Colors
+// -------------------------------------
+
+<<<<<<< HEAD
+
+$dublinHoverGrey: #d2d2d5;
+$dublinNavGrey: #888895;
+
+$dublinTextBlue: #5f7390;
+$dublinTextGrey: #505050;
+$dublinTextLight: #c3c3c4;
+
+=======
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+// -------------------------------------
+//   Header
+// -------------------------------------
+
+<<<<<<< HEAD
+// h1, h2, h3 {
+// 	font-family: 'mavenprolight-300';
+// }
+// h4, h5, h6, p {
+// 	font-family: 'mavenprolight-200';
+// }
+nav {
+	li {
+		display: inline-block;
+		margin: 0.5em;
+	}
+
+	a{
+		font-family: 'colaboratelightregular';
+		color: $dublinNavGrey;
+		float: left;
+		width: auto;
+		margin: 0;
+		padding: 5px 10px;
+		text-decoration: none;
+		font-size: 14px;
+		border-radius: 7px;
+		border: 1px solid transparent;
+		font-size: 1em; 
+		&:hover {
+	        border: 1px solid black;
+	        // @include border-radius(10px);
+	        // -webkit-border-radius: 10px; 
+	        // border-radius: 10px; 
+	        background: $dublinHoverGrey;
+	        color: black;
+	        text-decoration: none
+    	}
+	}
+}
+
+
+.header-left p {
+	font-family: 'franklin_gothic_fsbook';
+	color: $cream;
+	margin-left: 2em;
+}
+
+.header-left h2 {
+	font-family: 'flare_light_gothicregular';
+	color: $cream;
+	margin-left: 1.5em;
+}
+
+.hero-text h1 {
+	font-family: 'chunkfiveroman';
+}
+=======
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+
+// -------------------------------------
+//   Main-Content
+// -------------------------------------
+<<<<<<< HEAD
+.dublin-blue {
+	color: $dublinTextBlue;
+}
+
+.app-columns {
+	p {
+		padding-left: 12%;
+	}
+
+	img {
+		padding-right: 2%;
+		&:hover {
+			opacity: 0.5;
+			cursor: pointer;
+		}
+	}
+	
+}
+
+.hero-text h3 {
+	color: $cream;
+	font-family: 'colaboratelightregular';
+	font-size: 1.25em; 
+	
+}
+
+span {
+	color: $dublinTextBlue;
+}
+
+p{
+	font-family: 'colaboratelightregular';
+	color: $dublinTextGrey;
+}
+
+h3 {
+	font-family: 'colaboratelightregular';
+	color: $dublinTextLight;
+}
+
+// -------------------------------------
+//   Footer
+// -------------------------------------
+
+// footer p {
+// 	font-family: 'contraregular';
+// 	color: $cream;
+// }
+
+h6 {
+	font-family: 'contraitalic';
+	color: $cream;
+}
+
+footer {
+	p {
+		font-family: 'contraregular';
+		color: $cream;
+	}
+
+	h1 {
+		font-family: 'colaboratelightregular';
+		color: $dublinTextLight;
+	}
+}
+=======
+
+
+// -------------------------------------
+//   Footer
+// -------------------------------------
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347

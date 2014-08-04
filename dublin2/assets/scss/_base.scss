@@ -1,0 +1,34 @@
+// -------------------------------------
+//   Base
+// -------------------------------------
+// ----- Base-level tags (body, p, etc.)
+// -------------------------------------
+
+
+p {
+	color: $charcoal;
+}
+
+a {
+	color: $carrot;
+	text-decoration: none;
+	@include transition (all .3s ease-in-out);
+	&:hover {
+		color: $pumpkin;
+		text-decoration: underline;
+	}
+}
+
+// LISTS
+
+ol.default {
+	@extend %default-ol;
+}
+
+ul.default {
+	@extend %default-ul;
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347

@@ -1,0 +1,412 @@
+// -------------------------------------
+//   Layout
+// -------------------------------------
+// ----- Margin, Padding, and General Sizing of Main Containers
+// -------------------------------------
+
+html,
+body {
+<<<<<<< HEAD
+  font-size: 100%;
+  width: 100%;
+  height: 100%;  
+}
+
+body {
+  background: #e7e8ea;
+=======
+  font-size: 100%; 
+}
+
+body {
+  background: $carrot;
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+  color: #222222;
+  padding: 0;
+  margin: 0;
+  font-family: $helvetica;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  cursor: default; 
+}
+
+<<<<<<< HEAD
+
+// SIMPLIFIED GRID
+
+=======
+// SIMPLIFIED GRID
+
+// .row { 
+// 	float: left;
+// 	width: 100%; 
+// 	@include row();
+// }
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+.row { 
+	@include row();
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	max-width: 62.5rem;
+	*zoom: 1;
+<<<<<<< HEAD
+	// padding-top: 5em;
+	padding-bottom: 5em;
+=======
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+	
+	@include row();
+	@include outer-container;
+	@include mq(iphone) {
+		max-width: 320px;
+	}
+	@include mq(android) {
+		max-width: 480px;
+	}
+	@include mq(tablet) {
+		max-width: 768px;
+	}
+	@include mq(laptop) {
+		max-width: 960px;
+	}
+	@include mq(desktop) {
+		max-width: 1280px;
+	}
+}
+
+.whole {
+	@include span-columns(12);
+<<<<<<< HEAD
+=======
+	@include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+ 	}
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
+ }
+
+.half { 
+	@include span-columns(6);
+	@include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+	}
+}
+
+.third { 
+	@include span-columns(4);
+	@include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+	}
+}
+
+.fourth { 
+	@include span-columns(3);
+	@include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+  }
+}
+
+.sixth { 
+	@include span-columns(2);
+	@include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+	}
+}
+
+<<<<<<< HEAD
+.one { @include span-columns(1);
+	@include media(min-width 320px max-width 480px, 6) {
+	  @include span-columns(6);
+	  
+	}
+}
+
+// MY STUFF
+
+.l-top-section {
+	@include background-image(url("../img/header/blue-bg.png"), url("../img/header/blue-bg.png"));
+	@include background-cover;
+	height: 50em;
+}
+
+button {
+	@include transition (all .3s ease-in-out);
+	
+}
+
+.header-left,.header-right {
+	padding-top: 5em;
+}
+
+.header-left p{
+	padding-left: 5%;
+}
+
+.header-left img {
+	padding-top: 1em;
+	@include fade-hover;
+	
+}
+
+.l-hero-section {
+	padding-left: 7%;
+	padding-right: 7%;
+	&.row {
+		padding-bottom: 0;
+	}
+}
+
+.hero-text {
+	padding-top: 5em;
+	button {
+		width: 11em;
+		margin-top: 4em;
+		margin-right: 1em;
+	}
+	img {
+		margin-right: 1em;
+		margin-top: 1em;
+	}
+}
+
+.hero {
+	@include background-image(url("../img/body/hero.png"), url("../img/body/hero.png"));
+	@include background-contain;
+	height: 30em;
+	// opacity: 0;
+}
+
+#hero-left {
+	left: 10%;
+}
+
+#hero-right {
+	right: 10%;
+}
+
+.icon-left {
+	@include background-image(url("../img/body/left.png"), url("../img/body/left.png"));
+	@include background-cover;
+	@include fade-hover;
+	height: 10em;
+	-webkit-box-shadow: 2px 2px 2px $dublinNavGrey; 
+	box-shadow: 2px 2px 2px $dublinNavGrey;
+	opacity: 0;
+}
+
+.icon-left-middle {
+	@include background-image(url("../img/body/left-middle.png"), url("../img/body/left-middle.png"));
+	@include background-cover;
+	@include fade-hover;
+	height: 10em;
+	-webkit-box-shadow: 2px 2px 2px $dublinNavGrey; 
+	box-shadow: 2px 2px 2px $dublinNavGrey;
+	opacity: 0;
+}
+
+.icon-right-middle {
+	@include background-image(url("../img/body/right-middle.png"), url("../img/body/right-middle.png"));
+	@include background-cover;
+	@include fade-hover;
+	height: 10em;
+	-webkit-box-shadow: 2px 2px 2px $dublinNavGrey; 
+	box-shadow: 2px 2px 2px $dublinNavGrey;
+	opacity: 0;
+}
+
+.icon-right {
+	@include background-image(url("../img/body/right.png"), url("../img/body/right.png"));
+	@include background-cover;
+	@include fade-hover;
+	height: 10em;
+	-webkit-box-shadow: 2px 2px 2px $dublinNavGrey; 
+	box-shadow: 2px 2px 2px $dublinNavGrey;
+	opacity: 0;
+}
+
+
+.header-left {
+	width: 40%;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	float: left;
+}
+
+.header-right {
+	width: 60%;
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	float: left;
+}
+
+.l-home-statement {
+	width: 60%;
+	margin-left: 20%;
+}
+
+.l-ipad-section p span {
+	margin-left: 26%;
+}
+
+.app-columns {
+	.third {
+		img {
+			@include fade-hover;
+		}
+	}
+}
+
+
+#arrow-left {
+	left: 22%;
+	@include fade-hover;
+}
+
+#arrow-right {
+	right: 22%;
+	@include fade-hover;
+}
+
+.ipad-text {
+	button {
+		margin-left: 2em;
+		margin-top: 2em
+	}
+
+	img {
+		padding-right: 2%;
+		@include fade-hover;
+	}
+}
+
+.ipad-bottom{
+	@include fade-hover;
+}
+// .ipad-text button {
+// 	margin-left: 2em;
+// 	margin-top: 2em;
+// }
+
+.l-accordian {
+	img {
+		padding-right: 1%;
+		@include fade-hover;
+	}
+
+	// #a-container {
+	// 	height: 3em;
+	// 	overflow: hidden; 
+	// }
+}
+
+// .a-container {
+// 	height: 3em;
+// 	overflow: hidden;
+	
+// }
+
+// .l-accordian img {
+// 	padding-right: 1%;
+// }
+
+footer {
+	@include background-image(url("../img/footer/footer-bg.png"), url("../img/footer/footer-bg.png"));
+	@include background-cover;
+	height: 30em;
+	input[type=submit]{
+		@include transition (all .3s ease-in-out);
+	}
+}
+
+.footer-logo {
+	@include background-image(url("../img/footer/twitter-logo.png"), url("../img/footer/twitter-logo.png"));
+	@include background-contain;
+	@include fade-hover;
+	height: 5em;
+	width: 15%;
+	
+}
+
+.l-footer-heading {
+	margin-top: 1em;
+	border-bottom: 1px solid grey;
+	padding-bottom: 1em;
+}
+
+.footer-heading {
+	width: 85%;
+	// padding-left: 3em;
+}
+
+.dublin-form, input[type="text"] {
+	background: #242439;
+	color: $cream;
+}
+
+footer .row {
+	padding-bottom: 0;
+}
+
+.bottom-footer-row input[type="submit"] {
+	margin-left: 5em;
+}
+
+.bottom-footer-row{
+	img {
+		padding-right: 5%;
+		@include fade-hover;
+	}
+}
+
+// ==================================================
+
+=======
+.one { @include span-columns(1); }
+
+.grid-example {
+	float: left;
+	height: 100px;
+	background: $muteNavy;
+	margin-bottom: 2.35765%;
+}
+
+.page-wrap {
+	width: 100%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 15px;
+	@include row();
+	@include outer-container;
+	@include mq(iphone) {
+		max-width: 320px;
+	}
+	@include mq(android) {
+		max-width: 480px;
+	}
+	@include mq(tablet) {
+		max-width: 768px;
+	}
+	@include mq(laptop) {
+		max-width: 960px;
+	}
+	@include mq(desktop) {
+		max-width: 1280px;
+	}
+}
+
+.responsive-element {
+  @include media(min-width 320px max-width 480px, 6) {
+    @include span-columns(6);
+    
+  }
+  padding-top: 5em;
+  background: $muteBlue;
+  text-align: center;
+}
+
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347

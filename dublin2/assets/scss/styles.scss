@@ -1,0 +1,83 @@
+// IMPORT BOURBON
+
+@import "bourbon/bourbon";
+@import "bitters/base";
+@import "neat/neat";
+
+// -------------------------------------
+//   Core
+// -------------------------------------
+
+// ----- Settings - @Font-Face Declarations, Variables ----- //
+@import "settings";
+
+// ----- Helpers - Extends, Functions, and Mixins ----- //
+@import "helpers";
+
+// ----- Base - Base-level tags (body, p, etc.) ----- //
+@import "base";
+
+// ----- Typography - Fonts and Colors ----- //
+@import "typography";
+
+// ----- Layout - Margin, Padding, Sizing ----- //
+@import "layout";
+
+// ----- Skin - Backgrounds, Borders, Box-shadow, etc ----- //
+@import "skin";
+
+
+// -------------------------------------
+//   Inbox 
+// -------------------------------------
+// ----- The inbox allows developers, and those not actively working on the CSS, 
+// to quickly add styles that are easily seen by the maintainer of the file.
+//
+//
+// -------------------------------------
+// -------------------------------------
+
+
+// -------------------------------------
+//   Shame 
+// -------------------------------------
+// ----- Need to add a quick fix, hack, or questionable technique?  Add it here, fix it later.
+<<<<<<< HEAD
+
+.fourth {
+	@include grayscale-hover;
+	@include media(min-width 320px max-width 760px, 6) {
+		margin: 1em 1%;
+	}
+}
+// -------------------------------------
+// -------------------------------------
+=======
+//
+//
+// -------------------------------------
+// -------------------------------------
+
+// Bullshit
+
+// body {
+//   background: $carrot; 
+// }
+
+// .grid-example {
+// 	float: left;
+// 	height: 100px;
+// 	background: $muteNavy;
+// 	margin-bottom: 2.35765%;
+// }
+
+// .responsive-element {
+//   @include media(min-width 320px max-width 480px, 6) {
+//     @include span-columns(6);
+    
+//   }
+//   padding-top: 5em;
+//   background: $muteBlue;
+//   text-align: center;
+// }
+>>>>>>> ea8a446f2438d1c870bceeffb135c37e775b5347
