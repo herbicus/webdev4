@@ -1,0 +1,413 @@
+// -------------------------------------
+//   Layout
+// -------------------------------------
+// ----- Margin, Padding, and General Sizing of Main Containers
+// -------------------------------------
+* {
+  @include box-sizing(border-box);
+}
+
+html,
+body {
+  font-size: 100%;
+  width: 100%;
+  height: 100%;  
+}
+
+body {
+  background: $cream;
+  color: #222222;
+  padding: 0;
+  margin: 0;
+  font-family: $helvetica;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  cursor: default;
+  text-rendering: optimizeLegibility;
+}
+
+// SIMPLIFIED GRID
+
+.row { 
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	max-width: 62.5rem; //960px
+	*zoom: 1;
+	@include row();
+	@include outer-container;
+	@include mq(iphone) {
+		max-width: 320px;
+	}
+	@include mq(android) {
+		max-width: 480px;
+	}
+	@include mq(tablet) {
+		max-width: 768px;
+	}
+	@include mq(laptop) {
+		max-width: 960px;
+	}
+	@include mq(desktop) {
+		max-width: 1280px;
+	}
+}
+
+.whole {
+	@include span-columns(12);
+	@include media(min-width 320px max-width 768px, 6) {
+    	@include span-columns(6);
+    	margin-top: 1em;
+ 	}
+ }
+
+.half { 
+	@include span-columns(6);
+	@include media(min-width 320px max-width 768px, 6) {
+    	@include span-columns(6);
+    	margin-top: 1em;
+	}
+}
+
+.third { 
+	@include span-columns(4);
+	@include media(min-width 320px max-width 768px, 6) {
+    	@include span-columns(6);
+    	margin-top: 1em;
+	}
+}
+
+.fourth { 
+	@include span-columns(3);
+	// @include media(min-width 480px max-width 768px, 4) {
+	// 	@include span-columns(4);
+	// 	margin-top: 1em;
+	// }
+	
+	@include media(min-width 320px max-width 768px, 6) {
+    	@include span-columns(6);
+    	margin-top: 1em;
+  	}
+}
+
+.sixth { 
+	@include span-columns(2);
+	@include media(min-width 320px max-width 768px, 6) {
+    	@include span-columns(6);
+    	margin-top: 1em;
+	}
+}
+
+.one { 
+	@include span-columns(1);
+	@include media(min-width 320px max-width 768px, 6) {
+	    @include span-columns(6);
+	    margin-top: 1em;
+	}
+}
+
+// CONTENT
+
+.row {
+	margin-top: 1em;
+}
+
+button {
+	@include transition (all .3s ease-in-out);
+}
+
+header {
+	h1 {
+		font-size: 1em;
+		padding-top: 2em;
+	}
+
+	h2 {
+		font-family: 'biogalaxyregular';
+		font-size: 0.75em;
+		// margin-left: 20%;
+		// margin-top: 3%;
+		padding: 3% 0 0 20%;
+	}
+	
+	a {
+		font-size: 1em; 
+		font-family: 'biogalaxyregular';
+		color: $charcoal;
+	}
+
+
+	.logo {
+		font-family: 'tombotsregular';
+		font-size: 5em;
+		padding-top: 2em;
+	}
+
+	.header-nav {
+		ul {
+			padding-top: 4em;
+			li {
+				display: inline-block;
+				padding: 0 2em;
+				font-family: 'biogalaxyregular';
+				font-size: 0.75em;
+				// border-left: 1px dashed $charcoal;
+				// &:last-child {
+				// 	border-right: 1px dashed $charcoal;
+			}
+		}
+
+	}
+
+	.mobile {
+		display: none;
+		position: fixed;
+		z-index: 20;
+		h1 {
+			text-shadow: 0 2px 2px $cream; 
+		}
+
+		.mobile-nav-menu {
+			@include fade-callout(0.5, black, $cream);
+			text-align: center;
+			li {
+				width: 20em; 
+				padding: 1em 1%;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 0;
+				margin-bottom: 0;
+				border-top: 1px solid $cream;
+				&:last-child {
+					border-bottom: 1px solid $cream;
+				}
+				a {
+					color: $cream;
+					text-shadow: 0 2px 2px black; 
+				}
+			}
+		}
+	}
+
+	// MEDIA QUERIES FOR HEADER
+	@include media(min-width 320px max-width 760px, 6){
+		.mobile {
+			display: block;
+			padding-bottom: 1em;
+		}
+
+		.header-nav, .title-area {
+			display: none;
+		}
+	}
+}
+
+.header-border {
+	padding-top: 1em;
+	border-bottom: 5px solid #ccc;
+}
+
+.section-1 {
+	@include background-image(url("../img/section-bg.jpg"), url("../img/section-bg.jpg"));
+	@include bg-cover;
+	background-attachment: fixed;
+	height: 35em;
+	color: $cream;
+	.half {
+		margin-top: 5em;
+		padding: 3%;
+		@include fade-callout(0.5, black, $cream);
+		h1, h2 {
+			font-family: 'biogalaxyregular';
+		}
+		p {
+			color: $cream;
+			font-style: bold;
+			font-size: 1.25rem;  
+		}
+	}
+}
+
+.section-2 {
+	.logo {
+		font-family: 'tombotsregular';
+		font-size: 5em;
+		padding-top: 2em;
+		padding-top: 0;
+		text-align: center;
+		@include fade-hover;
+		&:hover {
+			-webkit-animation: shake 0.5s ease-in-out; 
+			-moz-animation: shake 0.5s ease-in-out; 
+			-o-animation: shake 0.5s ease-in-out; 
+			animation: shake 0.5s ease-in-out;
+		    color: $muteBlue;
+		}
+	}
+	h2 {
+		font-family: 'biogalaxyregular';
+		font-size: 1em;
+		padding-bottom: 0.5em;
+		text-align: center;
+		padding-bottom: 1em;
+	}
+	.fourth {
+		position: relative;
+	}
+
+	#one,#two,#three,#four {
+		opacity: 1;
+	}
+}
+
+.section-4 {
+	.row {
+		// @include shadow-border($charcoal);
+		// @include fade-callout(0.75, #000, $cream);
+		@include background-image(url("../img/screen.png"), url("../img/screen.png"));
+		@include bg-contain;
+		height: 30em;
+		padding: 1em 1%;
+		-webkit-border-radius: 5px; 
+		border-radius: 5px;
+		text-align: center;
+	}
+	
+	h1 {
+		font-family: 'biogalaxyregular';
+		font-size: 3em;
+		text-align: center;
+		padding-bottom: 1em;
+		color: $cream;
+	}
+
+	video {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+}
+
+.tile {
+	width: 33.33333%;
+	height: 30em;
+	text-align: center;
+	margin-bottom: 3em;
+	@include shadow-border($charcoal);
+	@include media(min-width 320px max-width 480px, 6) {
+    	@include span-columns(6);
+    	padding: 1em 1em;
+    	margin-left: auto;
+    	margin-right: auto;
+    	margin-top: 0;
+    	margin-bottom: 0;
+    }
+    p {
+    	color: $cream;
+    	font-family: 'mavenprolight-300';
+    	text-shadow: 0 2px 2px black; 
+    }
+    
+    h3 {
+    	color: $cream;
+    	padding-top: 1em;
+    	font-family: 'mavenprolight-300';
+    	text-shadow: 0 2px 2px black; 
+
+    }
+
+    h1 {
+    	@extend h3;
+    	font-family: 'tombotsregular';
+    	font-size: 5em;
+    }
+}
+
+.t1 {
+	@include background-image(url("../img/tilex.jpg"), url("../img/tilex.jpg"));
+	@include bg-cover;
+	@include transition (all .3s ease-in-out);
+	// opacity: 1;
+	 -webkit-filter: brightness(25%);
+	&:hover {
+		-webkit-filter: brightness(100%);
+		cursor: pointer;
+	    border: 5px solid $charcoal;
+	    
+	}
+	
+}
+
+.t2 {
+	@extend .t1;
+	@include background-image(url("../img/tilex1.jpg"), url("../img/tilex1.jpg"));
+}
+
+.t3 {
+	@extend .t1;
+	@include background-image(url("../img/tilex2x.jpg"), url("../img/tilex2x.jpg"));
+}
+
+footer {
+	@include background-image(url("../img/footer.jpg"), url("../img/footer.jpg"));
+	@include bg-cover;
+	background-position: center top; 
+	height: 30em;
+	.half {
+		padding-top: 3em;
+		.social-icon {
+			font-family: 'socicon';
+			font-size: 2em;
+			display: inline-block;
+			padding-left: 1em;
+			@include transition (all .3s ease-in-out);
+			&:hover {
+				color: $muteNavy;
+				cursor: pointer;
+				
+			}
+		}
+
+		a {
+			color: $cream;
+			line-height: 3em;
+			font-family: 'biogalaxyregular';
+			&:hover {
+				cursor: pointer;
+				color: $carrot;
+			}
+		}
+
+		form {
+			width: 57%;
+			padding: 2%;
+			// @include shadow-border($charcoal);
+			@include fade-callout(0.5, black, $muteNavy);
+			-webkit-border-radius: 5px; 
+			border-radius: 5px; 
+		}
+
+		// input {
+		// 	@include shadow-border($charcoal);
+			
+		// }
+	}
+	@include media(min-width 320px max-width 480px, 6) {
+		.half {
+			width: 100%;
+			
+			form {
+				width: 100%; 
+			}
+		}
+
+		.footer-site-map {
+			display: none;
+		}
+	}
+}
+

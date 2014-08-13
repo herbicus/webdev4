@@ -1,0 +1,32 @@
+// -------------------------------------
+//   Base
+// -------------------------------------
+// ----- Base-level tags (body, p, etc.)
+// -------------------------------------
+
+
+p {
+	color: $charcoal;
+	font-family: 'mavenprolight-300';
+	line-height: 1.5em;
+	
+}
+
+a {
+	color: $carrot;
+	text-decoration: none;
+	@include transition (all .3s ease-in-out);
+	&:hover {
+		color: $muteBlue;
+	}
+}
+
+// LISTS
+
+ol.default {
+	@extend %default-ol;
+}
+
+ul.default {
+	@extend %default-ul;
+}

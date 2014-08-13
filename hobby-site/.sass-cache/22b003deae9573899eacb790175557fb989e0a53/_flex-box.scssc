@@ -1,0 +1,1294 @@
+3.3.14 (Maptastic Maple)
+2b2629b5c2628d9e6bf87ae50b4121cf9e94ea3f
+o:Sass::Tree::RootNode:@has_childrenT:
+@linei:@template"H// CSS3 Flexible Box Model and property defaults
+
+// Custom shorthand notation for flexbox
+@mixin box($orient: inline-axis, $pack: start, $align: stretch) {
+  @include display-box;
+  @include box-orient($orient);
+  @include box-pack($pack);
+  @include box-align($align);
+}
+
+@mixin display-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox; // IE 10
+  display: box;
+}
+
+@mixin box-orient($orient: inline-axis) {
+// horizontal|vertical|inline-axis|block-axis|inherit
+  @include prefixer(box-orient, $orient, webkit moz spec);
+}
+
+@mixin box-pack($pack: start) {
+// start|end|center|justify
+  @include prefixer(box-pack, $pack, webkit moz spec);
+  -ms-flex-pack: $pack; // IE 10
+}
+
+@mixin box-align($align: stretch) {
+// start|end|center|baseline|stretch
+  @include prefixer(box-align, $align, webkit moz spec);
+  -ms-flex-align: $align; // IE 10
+}
+
+@mixin box-direction($direction: normal) {
+// normal|reverse|inherit
+  @include prefixer(box-direction, $direction, webkit moz spec);
+  -ms-flex-direction: $direction; // IE 10
+}
+
+@mixin box-lines($lines: single) {
+// single|multiple
+  @include prefixer(box-lines, $lines, webkit moz spec);
+}
+
+@mixin box-ordinal-group($int: 1) {
+  @include prefixer(box-ordinal-group, $int, webkit moz spec);
+  -ms-flex-order: $int; // IE 10
+}
+
+@mixin box-flex($value: 0.0) {
+  @include prefixer(box-flex, $value, webkit moz spec);
+  -ms-flex: $value; // IE 10
+}
+
+@mixin box-flex-group($int: 1) {
+  @include prefixer(box-flex-group, $int, webkit moz spec);
+}
+
+// CSS3 Flexible Box Model and property defaults
+// Unified attributes for 2009, 2011, and 2012 flavours.
+
+// 2009 - display (box | inline-box)
+// 2011 - display (flexbox | inline-flexbox)
+// 2012 - display (flex | inline-flex)
+@mixin display($value) {
+//  flex | inline-flex
+    @if $value == "flex" {
+        // 2009
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+
+        // 2012
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox; // 2011 (IE 10)
+        display: flex;
+    }
+
+    @elseif $value == "inline-flex" {
+        display: -webkit-inline-box;
+        display: -moz-inline-box;
+        display: inline-box;
+
+        display: -webkit-inline-flex;
+        display: -moz-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+    }
+
+    @else {
+        display: $value;
+    }
+}
+
+// 2009 - box-flex (integer)
+// 2011 - flex (decimal | width decimal)
+// 2012 - flex (integer integer width)
+@mixin flex($value) {
+
+    // Grab flex-grow for older browsers.
+    $flex-grow: nth($value, 1);
+
+    // 2009
+    @include prefixer(box-flex, $flex-grow, webkit moz spec);
+
+    // 2011 (IE 10), 2012
+    @include prefixer(flex, $value, webkit moz ms spec);
+}
+
+// 2009 - box-orient ( horizontal | vertical | inline-axis | block-axis)
+//      - box-direction (normal | reverse)      
+// 2011 - flex-direction (row | row-reverse | column | column-reverse)
+// 2012 - flex-direction (row | row-reverse | column | column-reverse)
+@mixin flex-direction($value: row) {
+
+    // Alt values.
+    $value-2009: $value;
+    $value-2011: $value;
+    $direction: "normal";
+
+    @if $value == row {
+        $value-2009: horizontal;
+    }
+
+    @elseif $value == "row-reverse" {
+        $value-2009: horizontal;
+        $direction: reverse;
+    }
+
+    @elseif $value == column {
+        $value-2009: vertical;
+    }
+
+    @elseif $value == "column-reverse" {
+        $value-2009: vertical;
+        $direction: reverse;
+    }
+
+    // 2009
+    @include prefixer(box-orient, $value-2009, webkit moz spec);
+    @if $direction == "reverse" {
+        @include prefixer(box-direction, $direction, webkit moz spec);
+    }
+
+    // 2012
+    @include prefixer(flex-direction, $value, webkit moz spec);
+
+    // 2011 (IE 10)
+    -ms-flex-direction: $value;
+}
+
+// 2009 - box-lines (single | multiple)
+// 2011 - flex-wrap (nowrap | wrap | wrap-reverse)
+// 2012 - flex-wrap (nowrap | wrap | wrap-reverse)
+@mixin flex-wrap($value: nowrap) {
+
+    // Alt values.
+    $alt-value: $value;
+    @if $value == nowrap {
+        $alt-value: single;
+    }
+
+    @elseif $value == wrap {
+        $alt-value: multiple;
+    }
+
+    @elseif $value == "wrap-reverse" {
+        $alt-value: multiple;
+    }
+
+    @include prefixer(box-lines, $alt-value, webkit moz spec);
+    @include prefixer(flex-wrap, $value, webkit moz ms spec);
+}
+
+// 2009 - TODO: parse values into flex-direction/flex-wrap
+// 2011 - TODO: parse values into flex-direction/flex-wrap
+// 2012 - flex-flow (flex-direction || flex-wrap)
+@mixin flex-flow($value) {
+    @include prefixer(flex-flow, $value, webkit moz spec);
+}
+
+// 2009 - box-ordinal-group (integer)
+// 2011 - flex-order (integer)
+// 2012 - order (integer)
+@mixin order($int: 0) {
+    // 2009
+    @include prefixer(box-ordinal-group, $int, webkit moz spec);
+
+    // 2012
+    @include prefixer(order, $int, webkit moz spec);
+
+    // 2011 (IE 10)
+    -ms-flex-order: $int;
+}
+
+// 2012 - flex-grow (number)
+@mixin flex-grow($number: 0) {
+    @include prefixer(flex-grow, $number, webkit moz spec);
+    -ms-flex-positive: $number;
+}
+
+// 2012 - flex-shrink (number)
+@mixin flex-shrink($number: 1) {
+    @include prefixer(flex-shrink, $number, webkit moz spec);
+    -ms-flex-negative: $number;
+}
+
+// 2012 - flex-basis (number)
+@mixin flex-basis($width: auto) {
+    @include prefixer(flex-basis, $width, webkit moz spec);
+    -ms-flex-preferred-size: $width;
+}
+
+// 2009 - box-pack (start | end | center | justify)
+// 2011 - flex-pack (start | end | center | justify)
+// 2012 - justify-content (flex-start | flex-end | center | space-between | space-around)
+@mixin justify-content ($value: flex-start) {
+
+    // Alt values.
+    $alt-value: $value;
+    @if $value == "flex-start" {
+        $alt-value: start;
+    }
+
+    @elseif $value == "flex-end" {
+        $alt-value: end;
+    }
+
+    @elseif $value == "space-between" {
+        $alt-value: justify;
+    }
+
+    @elseif $value == "space-around" {
+        $alt-value: center;
+    }
+
+    // 2009
+    @include prefixer(box-pack, $alt-value, webkit moz spec);
+
+    // 2012
+    @include prefixer(justify-content, $value, webkit moz ms o spec);
+
+    // 2011 (IE 10)
+    -ms-flex-pack: $alt-value;
+}
+
+// 2009 - box-align (start | end | center | baseline | stretch)
+// 2011 - flex-align (start | end | center | baseline | stretch)
+// 2012 - align-items (flex-start | flex-end | center | baseline | stretch)
+@mixin align-items($value: stretch) {
+
+    $alt-value: $value;
+
+    @if $value == "flex-start" {
+        $alt-value: start;
+    }    
+
+    @elseif $value == "flex-end" {
+        $alt-value: end;
+    }
+
+    // 2009
+    @include prefixer(box-align, $alt-value, webkit moz spec);
+
+    // 2012
+    @include prefixer(align-items, $value, webkit moz ms o spec);
+    
+    // 2011 (IE 10)
+    -ms-flex-align: $alt-value;    
+}
+
+// 2011 - flex-item-align (auto | start | end | center | baseline | stretch)
+// 2012 - align-self (auto | flex-start | flex-end | center | baseline | stretch)
+@mixin align-self($value: auto) {
+
+    $value-2011: $value;
+    @if $value == "flex-start" {
+        $value-2011: start;
+    }    
+
+    @elseif $value == "flex-end" {
+        $value-2011: end;
+    }
+
+    // 2012
+    @include prefixer(align-self, $value, webkit moz spec);
+
+    // 2011 (IE 10)
+    -ms-flex-item-align: $value-2011;
+}
+
+// 2011 - flex-line-pack (start | end | center | justify | distribute | stretch)
+// 2012 - align-content (flex-start | flex-end | center | space-between | space-around | stretch)
+@mixin align-content($value: stretch) {
+
+    $value-2011: $value;
+    @if $value == "flex-start" {
+        $value-2011: start;
+    }    
+
+    @elseif $value == "flex-end" {
+        $value-2011: end;
+    }
+
+    @elseif $value == "space-between" {
+        $value-2011: justify;
+    }
+
+    @elseif $value == "space-around" {
+        $value-2011: distribute;
+    }
+
+    // 2012
+    @include prefixer(align-content, $value, webkit moz spec);
+
+    // 2011 (IE 10)
+    -ms-flex-line-pack: $value-2011;
+}
+
+:@children[,o:Sass::Tree::CommentNode
+;i;	[ :@options{ :@value["8/* CSS3 Flexible Box Model and property defaults */:
+@type:silento;
+
+;i;	[ ;@
+;["0/* Custom shorthand notation for flexbox */;;o:Sass::Tree::MixinDefNode;T;i	;	[	o:Sass::Tree::MixinNode;i
+;	[ :@splat0:@kwarg_splat0;@
+:
+@args[ :@keywords{ :
+@name"display-box:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i
+:@offseti:@start_poso;;i
+;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scsso;;i;	[ ;0;0;@
+;[o:!Sass::Script::Tree::Variable;i:@underscored_name"orient;@
+;"orient;o;	;o;;i;i#;o;;i;i;@;"@:@filename@;o:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;"box-orient;o;	;o;;i;i$;o;;i;i;@;"@o;;i;	[ ;0;0;@
+;[o;#;i;$"	pack;@
+;"	pack;o;	;o;;i;i;o;;i;i;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"box-pack;o;	;o;;i;i ;o;;i;i;@;"@o;;i;	[ ;0;0;@
+;[o;#;i;$"
+align;@
+;"
+align;o;	;o;;i;i!;o;;i;i;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"box-align;o;	;o;;i;i";o;;i;i;@;"@;0;@
+;[[o;#;i	;$"orient;@
+;"orient;o;	;o;;i	;i;o;;i	;i;@;"@;%@o: Sass::Script::Tree::Literal	;i	;o: Sass::Script::Value::String;@
+;"inline-axis;:identifier;o;	;o;;i	;i%;o;;i	;i;@;"@;%@[o;#;i	;$"	pack;@
+;"	pack;o;	;o;;i	;i,;o;;i	;i';@;"@;%@o;+	;i	;o;,;@
+;"
+start;;-;o;	;o;;i	;i3;o;;i	;i.;@;"@;%@[o;#;i	;$"
+align;@
+;"
+align;o;	;o;;i	;i;;o;;i	;i5;@;"@;%@o;+	;i	;o;,;@
+;"stretch;;-;o;	;o;;i	;iD;o;;i	;i=;@;"@;%@;"box;o;	;o;;i	;iF;o;;i	;i;@;"@o;;T;i;	[
+o:Sass::Tree::PropNode;i:@name_source_rangeo;	;o;;i;i;o;;i;i;@;"@;	[ ;@
+;["display;o;+;i;o;,;@
+;"-webkit-box;;-;o;	;o;;i;i;o;;i;i;@;"@;o;	;o;;i;i;@;@;"@:@prop_syntax:new:
+@tabsi :@value_source_rangeo;	;@Š;o;;i;i;@;"@o;.;i;/o;	;o;;i;i;o;;i;i;@;"@;	[ ;@
+;["display;o;+;i;o;,;@
+;"-moz-box;;-;o;	;o;;i;i;o;;i;i;@;"@;o;	;o;;i;i;@;@;"@;0;1;2i ;3o;	;@›;o;;i;i;@;"@o;.;i;/o;	;o;;i;i;o;;i;i;@;"@;	[ ;@
+;["display;o;+;i;o;,;@
+;"-ms-flexbox;;-;o;	;o;;i;i;o;;i;i;@;"@;o;	;o;;i;i;@¡;@;"@;0;1;2i ;3o;	;@¬;o;;i;i;@;"@o;
+
+;i;	[ ;@
+;["/* IE 10 */;;o;.;i;/o;	;o;;i;i;o;;i;i;@;"@;	[ ;@
+;["display;o;+;i;o;,;@
+;"box;;-;o;	;o;;i;i;o;;i;i;@;"@;o;	;o;;i;i;@¶;@;"@;0;1;2i ;3o;	;@Á;o;;i;i;@;"@;0;@
+;[ ;"display-box;o;	;o;;i;i;o;;i;i;@;"@o;;T;i;	[o;
+
+;i;	[ ;@
+;["=/* horizontal|vertical|inline-axis|block-axis|inherit */;;o;;i;	[ ;0;0;@
+;[o;+	;i;o;,;@
+;"box-orient;;-;o;	;o;;i;i$;o;;i;i;@;"@;%@o;#;i;$"orient;@
+;"orient;o;	;o;;i;i-;o;;i;i&;@;"@;%@o:$Sass::Script::Tree::ListLiteral;i:@separator:
+space;@
+:@elements[o;+	;i;o;,;@
+;"webkit;;-;o;	;o;;i;i5;o;;i;i/;@;"@;%@o;+	;i;o;,;@
+;"moz;;-;o;	;o;;i;i9;o;;i;i6;@;"@;%@o;+	;i;o;,;@
+;"	spec;;-;o;	;o;;i;i>;o;;i;i:;@;"@;%@;o;	;o;;i;i>;o;;i;i.;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i;i?;o;;i;i;@;"@;0;@
+;[[o;#;i;$"orient;@
+;"orient;o;	;o;;i;i;o;;i;i;@;"@;%@o;+	;i;o;,;@
+;"inline-axis;;-;o;	;o;;i;i,;o;;i;i!;@;"@;%@;"box-orient;o;	;o;;i;i.;o;;i;i;@;"@o;;T;i;	[	o;
+
+;i;	[ ;@
+;["#/* start|end|center|justify */;;o;;i;	[ ;0;0;@
+;[o;+	;i;o;,;@
+;"box-pack;;-;o;	;o;;i;i";o;;i;i;@;"@;%@o;#;i;$"	pack;@
+;"	pack;o;	;o;;i;i);o;;i;i$;@;"@;%@o;4;i;5;6;@
+;7[o;+	;i;o;,;@
+;"webkit;;-;o;	;o;;i;i1;o;;i;i+;@;"@;%@o;+	;i;o;,;@
+;"moz;;-;o;	;o;;i;i5;o;;i;i2;@;"@;%@o;+	;i;o;,;@
+;"	spec;;-;o;	;o;;i;i:;o;;i;i6;@;"@;%@;o;	;o;;i;i:;o;;i;i*;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i;i;;o;;i;i;@;"@o;.;i;/o;	;o;;i;i;o;;i;i;@;"@;	[ ;@
+;["-ms-flex-pack;o;#;i;$"	pack;@
+;"	pack;o;	;o;;i;i;o;;i;i;@;"@;%@;o;	;o;;i;i;@F;@;"@;0;1;2i ;3o;	;@Q;o;;i;i;@;"@o;
+
+;i;	[ ;@
+;["/* IE 10 */;;;0;@
+;[[o;#;i;$"	pack;@
+;"	pack;o;	;o;;i;i;o;;i;i;@;"@;%@o;+	;i;o;,;@
+;"
+start;;-;o;	;o;;i;i";o;;i;i;@;"@;%@;"box-pack;o;	;o;;i;i$;o;;i;i;@;"@o;;T;i";	[	o;
+
+;i#;	[ ;@
+;[",/* start|end|center|baseline|stretch */;;o;;i$;	[ ;0;0;@
+;[o;+	;i$;o;,;@
+;"box-align;;-;o;	;o;;i$;i#;o;;i$;i;@;"@;%@o;#;i$;$"
+align;@
+;"
+align;o;	;o;;i$;i+;o;;i$;i%;@;"@;%@o;4;i$;5;6;@
+;7[o;+	;i$;o;,;@
+;"webkit;;-;o;	;o;;i$;i3;o;;i$;i-;@;"@;%@o;+	;i$;o;,;@
+;"moz;;-;o;	;o;;i$;i7;o;;i$;i4;@;"@;%@o;+	;i$;o;,;@
+;"	spec;;-;o;	;o;;i$;i<;o;;i$;i8;@;"@;%@;o;	;o;;i$;i<;o;;i$;i,;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i$;i=;o;;i$;i;@;"@o;.;i%;/o;	;o;;i%;i;o;;i%;i;@;"@;	[ ;@
+;["-ms-flex-align;o;#;i%;$"
+align;@
+;"
+align;o;	;o;;i%;i;o;;i%;i;@;"@;%@;o;	;o;;i%;i;@¡;@;"@;0;1;2i ;3o;	;@¬;o;;i%;i;@;"@o;
+
+;i%;	[ ;@
+;["/* IE 10 */;;;0;@
+;[[o;#;i";$"
+align;@
+;"
+align;o;	;o;;i";i;o;;i";i;@;"@;%@o;+	;i";o;,;@
+;"stretch;;-;o;	;o;;i";i&;o;;i";i;@;"@;%@;"box-align;o;	;o;;i";i(;o;;i";i;@;"@o;;T;i(;	[	o;
+
+;i);	[ ;@
+;["!/* normal|reverse|inherit */;;o;;i*;	[ ;0;0;@
+;[o;+	;i*;o;,;@
+;"box-direction;;-;o;	;o;;i*;i';o;;i*;i;@;"@;%@o;#;i*;$"direction;@
+;"direction;o;	;o;;i*;i3;o;;i*;i);@;"@;%@o;4;i*;5;6;@
+;7[o;+	;i*;o;,;@
+;"webkit;;-;o;	;o;;i*;i;;o;;i*;i5;@;"@;%@o;+	;i*;o;,;@
+;"moz;;-;o;	;o;;i*;i?;o;;i*;i<;@;"@;%@o;+	;i*;o;,;@
+;"	spec;;-;o;	;o;;i*;iD;o;;i*;i@;@;"@;%@;o;	;o;;i*;iD;o;;i*;i4;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i*;iE;o;;i*;i;@;"@o;.;i+;/o;	;o;;i+;i;o;;i+;i;@;"@;	[ ;@
+;["-ms-flex-direction;o;#;i+;$"direction;@
+;"direction;o;	;o;;i+;i&;o;;i+;i;@;"@;%@;o;	;o;;i+;i&;@ü;@;"@;0;1;2i ;3o;	;@;o;;i+;i;@;"@o;
+
+;i+;	[ ;@
+;["/* IE 10 */;;;0;@
+;[[o;#;i(;$"direction;@
+;"direction;o;	;o;;i(;i%;o;;i(;i;@;"@;%@o;+	;i(;o;,;@
+;"normal;;-;o;	;o;;i(;i-;o;;i(;i';@;"@;%@;"box-direction;o;	;o;;i(;i/;o;;i(;i;@;"@o;;T;i.;	[o;
+
+;i/;	[ ;@
+;["/* single|multiple */;;o;;i0;	[ ;0;0;@
+;[o;+	;i0;o;,;@
+;"box-lines;;-;o;	;o;;i0;i#;o;;i0;i;@;"@;%@o;#;i0;$"
+lines;@
+;"
+lines;o;	;o;;i0;i+;o;;i0;i%;@;"@;%@o;4;i0;5;6;@
+;7[o;+	;i0;o;,;@
+;"webkit;;-;o;	;o;;i0;i3;o;;i0;i-;@;"@;%@o;+	;i0;o;,;@
+;"moz;;-;o;	;o;;i0;i7;o;;i0;i4;@;"@;%@o;+	;i0;o;,;@
+;"	spec;;-;o;	;o;;i0;i<;o;;i0;i8;@;"@;%@;o;	;o;;i0;i<;o;;i0;i,;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i0;i=;o;;i0;i;@;"@;0;@
+;[[o;#;i.;$"
+lines;@
+;"
+lines;o;	;o;;i.;i;o;;i.;i;@;"@;%@o;+	;i.;o;,;@
+;"single;;-;o;	;o;;i.;i%;o;;i.;i;@;"@;%@;"box-lines;o;	;o;;i.;i';o;;i.;i;@;"@o;;T;i3;	[o;;i4;	[ ;0;0;@
+;[o;+	;i4;o;,;@
+;"box-ordinal-group;;-;o;	;o;;i4;i+;o;;i4;i;@;"@;%@o;#;i4;$"int;@
+;"int;o;	;o;;i4;i1;o;;i4;i-;@;"@;%@o;4;i4;5;6;@
+;7[o;+	;i4;o;,;@
+;"webkit;;-;o;	;o;;i4;i9;o;;i4;i3;@;"@;%@o;+	;i4;o;,;@
+;"moz;;-;o;	;o;;i4;i=;o;;i4;i:;@;"@;%@o;+	;i4;o;,;@
+;"	spec;;-;o;	;o;;i4;iB;o;;i4;i>;@;"@;%@;o;	;o;;i4;iB;o;;i4;i2;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i4;iC;o;;i4;i;@;"@o;.;i5;/o;	;o;;i5;i;o;;i5;i;@;"@;	[ ;@
+;["-ms-flex-order;o;#;i5;$"int;@
+;"int;o;	;o;;i5;i;o;;i5;i;@;"@;%@;o;	;o;;i5;i;@™;@;"@;0;1;2i ;3o;	;@¤;o;;i5;i;@;"@o;
+
+;i5;	[ ;@
+;["/* IE 10 */;;;0;@
+;[[o;#;i3;$"int;@
+;"int;o;	;o;;i3;i#;o;;i3;i;@;"@;%@o;+	;i3;o: Sass::Script::Value::Number
+:@original"1:@denominator_units[ ;@
+:@numerator_units[ ;i;o;	;o;;i3;i&;o;;i3;i%;@;"@;%@;"box-ordinal-group;o;	;o;;i3;i(;o;;i3;i;@;"@o;;T;i8;	[o;;i9;	[ ;0;0;@
+;[o;+	;i9;o;,;@
+;"box-flex;;-;o;	;o;;i9;i";o;;i9;i;@;"@;%@o;#;i9;$"
+value;@
+;"
+value;o;	;o;;i9;i*;o;;i9;i$;@;"@;%@o;4;i9;5;6;@
+;7[o;+	;i9;o;,;@
+;"webkit;;-;o;	;o;;i9;i2;o;;i9;i,;@;"@;%@o;+	;i9;o;,;@
+;"moz;;-;o;	;o;;i9;i6;o;;i9;i3;@;"@;%@o;+	;i9;o;,;@
+;"	spec;;-;o;	;o;;i9;i;;o;;i9;i7;@;"@;%@;o;	;o;;i9;i;;o;;i9;i+;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i9;i<;o;;i9;i;@;"@o;.;i:;/o;	;o;;i:;i;o;;i:;i;@;"@;	[ ;@
+;["-ms-flex;o;#;i:;$"
+value;@
+;"
+value;o;	;o;;i:;i;o;;i:;i;@;"@;%@;o;	;o;;i:;i;@ò;@;"@;0;1;2i ;3o;	;@ý;o;;i:;i;@;"@o;
+
+;i:;	[ ;@
+;["/* IE 10 */;;;0;@
+;[[o;#;i8;$"
+value;@
+;"
+value;o;	;o;;i8;i;o;;i8;i;@;"@;%@o;+	;i8;o;8
+;9"0;:@¶;@
+;;[ ;f0;o;	;o;;i8;i!;o;;i8;i;@;"@;%@;"box-flex;o;	;o;;i8;i#;o;;i8;i;@;"@o;;T;i=;	[o;;i>;	[ ;0;0;@
+;[o;+	;i>;o;,;@
+;"box-flex-group;;-;o;	;o;;i>;i(;o;;i>;i;@;"@;%@o;#;i>;$"int;@
+;"int;o;	;o;;i>;i.;o;;i>;i*;@;"@;%@o;4;i>;5;6;@
+;7[o;+	;i>;o;,;@
+;"webkit;;-;o;	;o;;i>;i6;o;;i>;i0;@;"@;%@o;+	;i>;o;,;@
+;"moz;;-;o;	;o;;i>;i:;o;;i>;i7;@;"@;%@o;+	;i>;o;,;@
+;"	spec;;-;o;	;o;;i>;i?;o;;i>;i;;@;"@;%@;o;	;o;;i>;i?;o;;i>;i/;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i>;i@;o;;i>;i;@;"@;0;@
+;[[o;#;i=;$"int;@
+;"int;o;	;o;;i=;i ;o;;i=;i;@;"@;%@o;+	;i=;o;8
+;9"1;:@¶;@
+;;[ ;i;o;	;o;;i=;i#;o;;i=;i";@;"@;%@;"box-flex-group;o;	;o;;i=;i%;o;;i=;i;@;"@o;
+
+;iA;	[ ;@
+;["q/* CSS3 Flexible Box Model and property defaults
+ * Unified attributes for 2009, 2011, and 2012 flavours. */;;o;
+
+;iD;	[ ;@
+;["{/* 2009 - display (box | inline-box)
+ * 2011 - display (flexbox | inline-flexbox)
+ * 2012 - display (flex | inline-flex) */;;o;;T;iG;	[o;
+
+;iH;	[ ;@
+;["/*  flex | inline-flex */;;u:Sass::Tree::IfNode|[o:"Sass::Script::Tree::Operation:
+@lineiI:@operand1o:!Sass::Script::Tree::Variable;iI:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iI:@offseti:@start_poso;;iI;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iI;i;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iI:@valueo: Sass::Script::Value::String;
+@	;"	flex:
+@type:string;o;	;o;;iI;i;o;;iI;i;@;@;@u:Sass::Tree::IfNodeÐ[o:"Sass::Script::Tree::Operation:
+@lineiV:@operand1o:!Sass::Script::Tree::Variable;iV:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iV:@offseti:@start_poso;;iV;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iV;i*;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iV:@valueo: Sass::Script::Value::String;
+@	;"inline-flex:
+@type:string;o;	;o;;iV;i);o;;iV;i;@;@;@u:Sass::Tree::IfNode}[00[o:Sass::Tree::PropNode:
+@lineib:@name_source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;ib:@offseti:@start_poso;
+;ib;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@children[ :@options{ :
+@name["display:@valueo:!Sass::Script::Tree::Variable;ib:@underscored_name"
+value;@;"
+value:@source_rangeo;	;	o;
+;ib;i;o;
+;ib;i;@;@:@filename@;o;	;	o;
+;ib;i;@
+;@;@:@prop_syntax:new:
+@tabsi :@value_source_rangeo;	;	@;o;
+;ib;i;@;@[o:Sass::Tree::PropNode;iW:@name_source_rangeo;	;o;;iW;i;o;;iW;i;@;@:@children[ ;
+@	;["display;o;;iW;o;;
+@	;"-webkit-inline-box; :identifier;o;	;o;;iW;i);o;;iW;i;@;@;o;	;o;;iW;i);@ ;@;@:@prop_syntax:new:
+@tabsi :@value_source_rangeo;	;@+;o;;iW;i;@;@o;#;iX;$o;	;o;;iX;i;o;;iX;i;@;@;%[ ;
+@	;["display;o;;iX;o;;
+@	;"-moz-inline-box; ;&;o;	;o;;iX;i&;o;;iX;i;@;@;o;	;o;;iX;i&;@1;@;@;';(;)i ;*o;	;@<;o;;iX;i;@;@o;#;iY;$o;	;o;;iY;i;o;;iY;i;@;@;%[ ;
+@	;["display;o;;iY;o;;
+@	;"inline-box; ;&;o;	;o;;iY;i!;o;;iY;i;@;@;o;	;o;;iY;i!;@B;@;@;';(;)i ;*o;	;@M;o;;iY;i;@;@o;#;i[;$o;	;o;;i[;i;o;;i[;i;@;@;%[ ;
+@	;["display;o;;i[;o;;
+@	;"-webkit-inline-flex; ;&;o;	;o;;i[;i*;o;;i[;i;@;@;o;	;o;;i[;i*;@S;@;@;';(;)i ;*o;	;@^;o;;i[;i;@;@o;#;i\;$o;	;o;;i\;i;o;;i\;i;@;@;%[ ;
+@	;["display;o;;i\;o;;
+@	;"-moz-inline-flex; ;&;o;	;o;;i\;i';o;;i\;i;@;@;o;	;o;;i\;i';@d;@;@;';(;)i ;*o;	;@o;o;;i\;i;@;@o;#;i];$o;	;o;;i];i;o;;i];i;@;@;%[ ;
+@	;["display;o;;i];o;;
+@	;"-ms-inline-flexbox; ;&;o;	;o;;i];i);o;;i];i;@;@;o;	;o;;i];i);@u;@;@;';(;)i ;*o;	;@{;o;;i];i;@;@o;#;i^;$o;	;o;;i^;i;o;;i^;i;@;@;%[ ;
+@	;["display;o;;i^;o;;
+@	;"inline-flex; ;&;o;	;o;;i^;i";o;;i^;i;@;@;o;	;o;;i^;i";@;@;@;';(;)i ;*o;	;@Œ;o;;i^;i;@;@[o:Sass::Tree::CommentNode
+;iJ:@children[ ;
+@	;["/* 2009 */; :silento:Sass::Tree::PropNode;iK:@name_source_rangeo;	;o;;iK;i;o;;iK;i;@;@;$[ ;
+@	;["display;o;;iK;o;;
+@	;"-webkit-box; :identifier;o;	;o;;iK;i";o;;iK;i;@;@;o;	;o;;iK;i";@$;@;@:@prop_syntax:new:
+@tabsi :@value_source_rangeo;	;@/;o;;iK;i;@;@o;&;iL;'o;	;o;;iL;i;o;;iL;i;@;@;$[ ;
+@	;["display;o;;iL;o;;
+@	;"-moz-box; ;(;o;	;o;;iL;i;o;;iL;i;@;@;o;	;o;;iL;i;@5;@;@;);*;+i ;,o;	;@@;o;;iL;i;@;@o;&;iM;'o;	;o;;iM;i;o;;iM;i;@;@;$[ ;
+@	;["display;o;;iM;o;;
+@	;"box; ;(;o;	;o;;iM;i;o;;iM;i;@;@;o;	;o;;iM;i;@F;@;@;);*;+i ;,o;	;@Q;o;;iM;i;@;@o;#
+;iO;$[ ;
+@	;["/* 2012 */; ;%o;&;iP;'o;	;o;;iP;i;o;;iP;i;@;@;$[ ;
+@	;["display;o;;iP;o;;
+@	;"-webkit-flex; ;(;o;	;o;;iP;i#;o;;iP;i;@;@;o;	;o;;iP;i#;@[;@;@;);*;+i ;,o;	;@f;o;;iP;i;@;@o;&;iQ;'o;	;o;;iQ;i;o;;iQ;i;@;@;$[ ;
+@	;["display;o;;iQ;o;;
+@	;"-moz-flex; ;(;o;	;o;;iQ;i ;o;;iQ;i;@;@;o;	;o;;iQ;i ;@l;@;@;);*;+i ;,o;	;@w;o;;iQ;i;@;@o;&;iR;'o;	;o;;iR;i;o;;iR;i;@;@;$[ ;
+@	;["display;o;;iR;o;;
+@	;"-ms-flexbox; ;(;o;	;o;;iR;i";o;;iR;i;@;@;o;	;o;;iR;i";@};@;@;);*;+i ;,o;	;@ƒ;o;;iR;i;@;@o;#
+;iR;$[ ;
+@	;["/* 2011 (IE 10) */; ;%o;&;iS;'o;	;o;;iS;i;o;;iS;i;@;@;$[ ;
+@	;["display;o;;iS;o;;
+@	;"	flex; ;(;o;	;o;;iS;i;o;;iS;i;@;@;o;	;o;;iS;i;@;@;@;);*;+i ;,o;	;@˜;o;;iS;i;@;@;0;@
+;[[o;#;iG;$"
+value;@
+;"
+value;o;	;o;;iG;i;o;;iG;i;@;"@;%@0;"display;o;	;o;;iG;i;o;;iG;i;@;"@o;
+
+;if;	[ ;@
+;["t/* 2009 - box-flex (integer)
+ * 2011 - flex (decimal | width decimal)
+ * 2012 - flex (integer integer width) */;;o;;T;ii;	[o;
+
+;ik;	[ ;@
+;["-/* Grab flex-grow for older browsers. */;;o:Sass::Tree::VariableNode;il:@guarded0;	[ ;@
+:
+@expro: Sass::Script::Tree::Funcall;il;0;0;@
+;[o;#;il;$"
+value;@
+;"
+value;o;	;o;;il;i ;o;;il;i;@;"@;%@o;+	;il;o;8
+;9"1;:@¶;@
+;;[ ;i;o;	;o;;il;i#;o;;il;i";@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"nth;o;	;o;;il;i$;o;;il;i;@;"@;%@;"flex-grow;o;	;o;;il;i$;o;;il;i;@;"@:@global0o;
+
+;in;	[ ;@
+;["/* 2009 */;;o;;io;	[ ;0;0;@
+;[o;+	;io;o;,;@
+;"box-flex;;-;o;	;o;;io;i$;o;;io;i;@;"@;%@o;#;io;$"flex_grow;@
+;"flex-grow;o;	;o;;io;i0;o;;io;i&;@;"@;%@o;4;io;5;6;@
+;7[o;+	;io;o;,;@
+;"webkit;;-;o;	;o;;io;i8;o;;io;i2;@;"@;%@o;+	;io;o;,;@
+;"moz;;-;o;	;o;;io;i<;o;;io;i9;@;"@;%@o;+	;io;o;,;@
+;"	spec;;-;o;	;o;;io;iA;o;;io;i=;@;"@;%@;o;	;o;;io;iA;o;;io;i1;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;io;iB;o;;io;i
+;@;"@o;
+
+;iq;	[ ;@
+;["/* 2011 (IE 10), 2012 */;;o;;ir;	[ ;0;0;@
+;[o;+	;ir;o;,;@
+;"	flex;;-;o;	;o;;ir;i ;o;;ir;i;@;"@;%@o;#;ir;$"
+value;@
+;"
+value;o;	;o;;ir;i(;o;;ir;i";@;"@;%@o;4;ir;5;6;@
+;7[	o;+	;ir;o;,;@
+;"webkit;;-;o;	;o;;ir;i0;o;;ir;i*;@;"@;%@o;+	;ir;o;,;@
+;"moz;;-;o;	;o;;ir;i4;o;;ir;i1;@;"@;%@o;+	;ir;o;,;@
+;"ms;;-;o;	;o;;ir;i7;o;;ir;i5;@;"@;%@o;+	;ir;o;,;@
+;"	spec;;-;o;	;o;;ir;i<;o;;ir;i8;@;"@;%@;o;	;o;;ir;i<;o;;ir;i);@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;ir;i=;o;;ir;i
+;@;"@;0;@
+;[[o;#;ii;$"
+value;@
+;"
+value;o;	;o;;ii;i;o;;ii;i;@;"@;%@0;"	flex;o;	;o;;ii;i;o;;ii;i;@;"@o;
+
+;iu;	[ ;@
+;["
+/* 2009 - box-orient ( horizontal | vertical | inline-axis | block-axis)
+ *      - box-direction (normal | reverse)      
+ * 2011 - flex-direction (row | row-reverse | column | column-reverse)
+ * 2012 - flex-direction (row | row-reverse | column | column-reverse) */;;o;;T;iy;	[o;
+
+;i{;	[ ;@
+;["/* Alt values. */;;o;=;i|;>0;	[ ;@
+;?o;#;i|;$"
+value;@
+;"
+value;o;	;o;;i|;i;o;;i|;i;@;"@;%@;"value-2009;o;	;o;;i|;i;o;;i|;i;@;"@;A0o;=;i};>0;	[ ;@
+;?o;#;i};$"
+value;@
+;"
+value;o;	;o;;i};i;o;;i};i;@;"@;%@;"value-2011;o;	;o;;i};i;o;;i};i;@;"@;A0o;=;i~;>0;	[ ;@
+;?o;+	;i~;o;,;@
+;"normal;:string;o;	;o;;i~;i;o;;i~;i;@;"@;%@;"direction;o;	;o;;i~;i;o;;i~;i;@;"@;A0u;<›[o:"Sass::Script::Tree::Operation:
+@linei{:@operand1o:!Sass::Script::Tree::Variable;i{:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i{:@offseti:@start_poso;;i{;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i{;i;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i{:@valueo: Sass::Script::Value::String;
+@	;"row:
+@type:identifier;o;	;o;;i{;i;o;;i{;i;@;@;@u:Sass::Tree::IfNode[o:"Sass::Script::Tree::Operation:
+@linei:@operand1o:!Sass::Script::Tree::Variable;i:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i:@offseti:@start_poso;;i;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i;i*;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i:@valueo: Sass::Script::Value::String;
+@	;"row-reverse:
+@type:string;o;	;o;;i;i);o;;i;i;@;@;@u:Sass::Tree::IfNodeÃ[o:"Sass::Script::Tree::Operation:
+@linei„:@operand1o:!Sass::Script::Tree::Variable;i„:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i„:@offseti:@start_poso;;i„;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i„;i#;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i„:@valueo: Sass::Script::Value::String;
+@	;"column:
+@type:identifier;o;	;o;;i„;i";o;;i„;i;@;@;@u:Sass::Tree::IfNode/[o:"Sass::Script::Tree::Operation:
+@lineiˆ:@operand1o:!Sass::Script::Tree::Variable;iˆ:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iˆ:@offseti:@start_poso;;iˆ;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iˆ;i-;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iˆ:@valueo: Sass::Script::Value::String;
+@	;"column-reverse:
+@type:string;o;	;o;;iˆ;i,;o;;iˆ;i;@;@;@0[o:Sass::Tree::VariableNode;i‰:@guarded0:@children[ ;
+@	:
+@expro;	;i‰;o;;
+@	;"vertical; :identifier;o;	;o;;i‰;i#;o;;i‰;i;@;@;@;"value-2009;o;	;o;;i‰;i#;o;;i‰;i;@;@:@global0o;";iŠ;#0;$[ ;
+@	;%o;	;iŠ;o;;
+@	;"reverse; ;&;o;	;o;;iŠ;i!;o;;iŠ;i;@;@;@;"direction;o;	;o;;iŠ;i!;o;;iŠ;i;@;@;'0[o:Sass::Tree::VariableNode;i…:@guarded0:@children[ ;
+@	:
+@expro;	;i…;o;;
+@	;"vertical; ;!;o;	;o;;i…;i#;o;;i…;i;@;@;@;"value-2009;o;	;o;;i…;i#;o;;i…;i;@;@:@global0[o:Sass::Tree::VariableNode;i€:@guarded0:@children[ ;
+@	:
+@expro;	;i€;o;;
+@	;"horizontal; :identifier;o;	;o;;i€;i%;o;;i€;i;@;@;@;"value-2009;o;	;o;;i€;i%;o;;i€;i;@;@:@global0o;#;i;$0;%[ ;
+@	;&o;	;i;o;;
+@	;"reverse; ;';o;	;o;;i;i!;o;;i;i;@;@;@;"direction;o;	;o;;i;i!;o;;i;i;@;@;(0[o:Sass::Tree::VariableNode;i|:@guarded0:@children[ ;
+@	:
+@expro;	;i|;o;;
+@	;"horizontal; ;!;o;	;o;;i|;i%;o;;i|;i;@;@;@;"value-2009;o;	;o;;i|;i%;o;;i|;i;@;@:@global0o;
+
+;i;	[ ;@
+;["/* 2009 */;;o;;iŽ;	[ ;0;0;@
+;[o;+	;iŽ;o;,;@
+;"box-orient;;-;o;	;o;;iŽ;i&;o;;iŽ;i;@;"@;%@o;#;iŽ;$"value_2009;@
+;"value-2009;o;	;o;;iŽ;i3;o;;iŽ;i(;@;"@;%@o;4;iŽ;5;6;@
+;7[o;+	;iŽ;o;,;@
+;"webkit;;-;o;	;o;;iŽ;i;;o;;iŽ;i5;@;"@;%@o;+	;iŽ;o;,;@
+;"moz;;-;o;	;o;;iŽ;i?;o;;iŽ;i<;@;"@;%@o;+	;iŽ;o;,;@
+;"	spec;;-;o;	;o;;iŽ;iD;o;;iŽ;i@;@;"@;%@;o;	;o;;iŽ;iD;o;;iŽ;i4;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iŽ;iE;o;;iŽ;i
+;@;"@u;<«[o:"Sass::Script::Tree::Operation:
+@linei:@operand1o:!Sass::Script::Tree::Variable;i:@underscored_name"direction:@options{ :
+@name"direction:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i:@offseti:@start_poso;;i;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i;i&;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i:@valueo: Sass::Script::Value::String;
+@	;"reverse:
+@type:string;o;	;o;;i;i%;o;;i;i;@;@;@0[o:Sass::Tree::MixinNode;i:@children[ :@splat0:@kwarg_splat0;
+@	:
+@args[o;	;i;o;;
+@	;"box-direction; :identifier;o;	;o;;i;i-;o;;i;i ;@;@;@o;;i;	"direction;
+@	;"direction;o;	;o;;i;i9;o;;i;i/;@;@;@o:$Sass::Script::Tree::ListLiteral;i:@separator:
+space;
+@	:@elements[o;	;i;o;;
+@	;"webkit; ;';o;	;o;;i;iA;o;;i;i;;@;@;@o;	;i;o;;
+@	;"moz; ;';o;	;o;;i;iE;o;;i;iB;@;@;@o;	;i;o;;
+@	;"	spec; ;';o;	;o;;i;iJ;o;;i;iF;@;@;@;o;	;o;;i;iJ;o;;i;i:;@;@;@:@keywordso:Sass::Util::NormalizedMap:	@mapIC:OrderedHash{ :
+@keys[ :@key_strings{ ;"prefixer;o;	;o;;i;iK;o;;i;i;@;@o;
+
+;i“;	[ ;@
+;["/* 2012 */;;o;;i”;	[ ;0;0;@
+;[o;+	;i”;o;,;@
+;"flex-direction;;-;o;	;o;;i”;i*;o;;i”;i;@;"@;%@o;#;i”;$"
+value;@
+;"
+value;o;	;o;;i”;i2;o;;i”;i,;@;"@;%@o;4;i”;5;6;@
+;7[o;+	;i”;o;,;@
+;"webkit;;-;o;	;o;;i”;i:;o;;i”;i4;@;"@;%@o;+	;i”;o;,;@
+;"moz;;-;o;	;o;;i”;i>;o;;i”;i;;@;"@;%@o;+	;i”;o;,;@
+;"	spec;;-;o;	;o;;i”;iC;o;;i”;i?;@;"@;%@;o;	;o;;i”;iC;o;;i”;i3;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i”;iD;o;;i”;i
+;@;"@o;
+
+;i–;	[ ;@
+;["/* 2011 (IE 10) */;;o;.;i—;/o;	;o;;i—;i;o;;i—;i
+;@;"@;	[ ;@
+;["-ms-flex-direction;o;#;i—;$"
+value;@
+;"
+value;o;	;o;;i—;i$;o;;i—;i;@;"@;%@;o;	;o;;i—;i$;@®;@;"@;0;1;2i ;3o;	;@¹;o;;i—;i;@;"@;0;@
+;[[o;#;iy;$"
+value;@
+;"
+value;o;	;o;;iy;i";o;;iy;i;@;"@;%@o;+	;iy;o;,;@
+;"row;;-;o;	;o;;iy;i';o;;iy;i$;@;"@;%@;"flex-direction;o;	;o;;iy;i);o;;iy;i;@;"@o;
+
+;iš;	[ ;@
+;["/* 2009 - box-lines (single | multiple)
+ * 2011 - flex-wrap (nowrap | wrap | wrap-reverse)
+ * 2012 - flex-wrap (nowrap | wrap | wrap-reverse) */;;o;;T;i;	[
+o;
+
+;iŸ;	[ ;@
+;["/* Alt values. */;;o;=;i ;>0;	[ ;@
+;?o;#;i ;$"
+value;@
+;"
+value;o;	;o;;i ;i;o;;i ;i;@;"@;%@;"alt-value;o;	;o;;i ;i;o;;i ;i;@;"@;A0u;<ª
+[o:"Sass::Script::Tree::Operation:
+@linei¡:@operand1o:!Sass::Script::Tree::Variable;i¡:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i¡:@offseti:@start_poso;;i¡;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i¡;i;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i¡:@valueo: Sass::Script::Value::String;
+@	;"nowrap:
+@type:identifier;o;	;o;;i¡;i;o;;i¡;i;@;@;@u:Sass::Tree::IfNode[o:"Sass::Script::Tree::Operation:
+@linei¥:@operand1o:!Sass::Script::Tree::Variable;i¥:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i¥:@offseti:@start_poso;;i¥;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i¥;i!;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i¥:@valueo: Sass::Script::Value::String;
+@	;"	wrap:
+@type:identifier;o;	;o;;i¥;i ;o;;i¥;i;@;@;@u:Sass::Tree::IfNodeˆ[o:"Sass::Script::Tree::Operation:
+@linei©:@operand1o:!Sass::Script::Tree::Variable;i©:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i©:@offseti:@start_poso;;i©;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i©;i+;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i©:@valueo: Sass::Script::Value::String;
+@	;"wrap-reverse:
+@type:string;o;	;o;;i©;i*;o;;i©;i;@;@;@0[o:Sass::Tree::VariableNode;iª:@guarded0:@children[ ;
+@	:
+@expro;	;iª;o;;
+@	;"multiple; :identifier;o;	;o;;iª;i";o;;iª;i;@;@;@;"alt-value;o;	;o;;iª;i";o;;iª;i;@;@:@global0[o:Sass::Tree::VariableNode;i¦:@guarded0:@children[ ;
+@	:
+@expro;	;i¦;o;;
+@	;"multiple; ;!;o;	;o;;i¦;i";o;;i¦;i;@;@;@;"alt-value;o;	;o;;i¦;i";o;;i¦;i;@;@:@global0[o:Sass::Tree::VariableNode;i¢:@guarded0:@children[ ;
+@	:
+@expro;	;i¢;o;;
+@	;"single; ;!;o;	;o;;i¢;i ;o;;i¢;i;@;@;@;"alt-value;o;	;o;;i¢;i ;o;;i¢;i;@;@:@global0o;;i­;	[ ;0;0;@
+;[o;+	;i­;o;,;@
+;"box-lines;;-;o;	;o;;i­;i%;o;;i­;i;@;"@;%@o;#;i­;$"alt_value;@
+;"alt-value;o;	;o;;i­;i1;o;;i­;i';@;"@;%@o;4;i­;5;6;@
+;7[o;+	;i­;o;,;@
+;"webkit;;-;o;	;o;;i­;i9;o;;i­;i3;@;"@;%@o;+	;i­;o;,;@
+;"moz;;-;o;	;o;;i­;i=;o;;i­;i:;@;"@;%@o;+	;i­;o;,;@
+;"	spec;;-;o;	;o;;i­;iB;o;;i­;i>;@;"@;%@;o;	;o;;i­;iB;o;;i­;i2;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i­;iC;o;;i­;i
+;@;"@o;;i®;	[ ;0;0;@
+;[o;+	;i®;o;,;@
+;"flex-wrap;;-;o;	;o;;i®;i%;o;;i®;i;@;"@;%@o;#;i®;$"
+value;@
+;"
+value;o;	;o;;i®;i-;o;;i®;i';@;"@;%@o;4;i®;5;6;@
+;7[	o;+	;i®;o;,;@
+;"webkit;;-;o;	;o;;i®;i5;o;;i®;i/;@;"@;%@o;+	;i®;o;,;@
+;"moz;;-;o;	;o;;i®;i9;o;;i®;i6;@;"@;%@o;+	;i®;o;,;@
+;"ms;;-;o;	;o;;i®;i<;o;;i®;i:;@;"@;%@o;+	;i®;o;,;@
+;"	spec;;-;o;	;o;;i®;iA;o;;i®;i=;@;"@;%@;o;	;o;;i®;iA;o;;i®;i.;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i®;iB;o;;i®;i
+;@;"@;0;@
+;[[o;#;i;$"
+value;@
+;"
+value;o;	;o;;i;i;o;;i;i;@;"@;%@o;+	;i;o;,;@
+;"nowrap;;-;o;	;o;;i;i%;o;;i;i;@;"@;%@;"flex-wrap;o;	;o;;i;i';o;;i;i;@;"@o;
+
+;i±;	[ ;@
+;["ª/* 2009 - TODO: parse values into flex-direction/flex-wrap
+ * 2011 - TODO: parse values into flex-direction/flex-wrap
+ * 2012 - flex-flow (flex-direction || flex-wrap) */;;o;;T;i´;	[o;;iµ;	[ ;0;0;@
+;[o;+	;iµ;o;,;@
+;"flex-flow;;-;o;	;o;;iµ;i%;o;;iµ;i;@;"@;%@o;#;iµ;$"
+value;@
+;"
+value;o;	;o;;iµ;i-;o;;iµ;i';@;"@;%@o;4;iµ;5;6;@
+;7[o;+	;iµ;o;,;@
+;"webkit;;-;o;	;o;;iµ;i5;o;;iµ;i/;@;"@;%@o;+	;iµ;o;,;@
+;"moz;;-;o;	;o;;iµ;i9;o;;iµ;i6;@;"@;%@o;+	;iµ;o;,;@
+;"	spec;;-;o;	;o;;iµ;i>;o;;iµ;i:;@;"@;%@;o;	;o;;iµ;i>;o;;iµ;i.;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iµ;i?;o;;iµ;i
+;@;"@;0;@
+;[[o;#;i´;$"
+value;@
+;"
+value;o;	;o;;i´;i;o;;i´;i;@;"@;%@0;"flex-flow;o;	;o;;i´;i;o;;i´;i;@;"@o;
+
+;i¸;	[ ;@
+;["f/* 2009 - box-ordinal-group (integer)
+ * 2011 - flex-order (integer)
+ * 2012 - order (integer) */;;o;;T;i»;	[o;
+
+;i¼;	[ ;@
+;["/* 2009 */;;o;;i½;	[ ;0;0;@
+;[o;+	;i½;o;,;@
+;"box-ordinal-group;;-;o;	;o;;i½;i-;o;;i½;i;@;"@;%@o;#;i½;$"int;@
+;"int;o;	;o;;i½;i3;o;;i½;i/;@;"@;%@o;4;i½;5;6;@
+;7[o;+	;i½;o;,;@
+;"webkit;;-;o;	;o;;i½;i;;o;;i½;i5;@;"@;%@o;+	;i½;o;,;@
+;"moz;;-;o;	;o;;i½;i?;o;;i½;i<;@;"@;%@o;+	;i½;o;,;@
+;"	spec;;-;o;	;o;;i½;iD;o;;i½;i@;@;"@;%@;o;	;o;;i½;iD;o;;i½;i4;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i½;iE;o;;i½;i
+;@;"@o;
+
+;i¿;	[ ;@
+;["/* 2012 */;;o;;iÀ;	[ ;0;0;@
+;[o;+	;iÀ;o;,;@
+;"
+order;;-;o;	;o;;iÀ;i!;o;;iÀ;i;@;"@;%@o;#;iÀ;$"int;@
+;"int;o;	;o;;iÀ;i';o;;iÀ;i#;@;"@;%@o;4;iÀ;5;6;@
+;7[o;+	;iÀ;o;,;@
+;"webkit;;-;o;	;o;;iÀ;i/;o;;iÀ;i);@;"@;%@o;+	;iÀ;o;,;@
+;"moz;;-;o;	;o;;iÀ;i3;o;;iÀ;i0;@;"@;%@o;+	;iÀ;o;,;@
+;"	spec;;-;o;	;o;;iÀ;i8;o;;iÀ;i4;@;"@;%@;o;	;o;;iÀ;i8;o;;iÀ;i(;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iÀ;i9;o;;iÀ;i
+;@;"@o;
+
+;iÂ;	[ ;@
+;["/* 2011 (IE 10) */;;o;.;iÃ;/o;	;o;;iÃ;i;o;;iÃ;i
+;@;"@;	[ ;@
+;["-ms-flex-order;o;#;iÃ;$"int;@
+;"int;o;	;o;;iÃ;i;o;;iÃ;i;@;"@;%@;o;	;o;;iÃ;i;@
+;@;"@;0;1;2i ;3o;	;@;o;;iÃ;i;@;"@;0;@
+;[[o;#;i»;$"int;@
+;"int;o;	;o;;i»;i;o;;i»;i;@;"@;%@o;+	;i»;o;8
+;9"0;:@¶;@
+;;[ ;i ;o;	;o;;i»;i;o;;i»;i;@;"@;%@;"
+order;o;	;o;;i»;i;o;;i»;i;@;"@o;
+
+;iÆ;	[ ;@
+;["$/* 2012 - flex-grow (number) */;;o;;T;iÇ;	[o;;iÈ;	[ ;0;0;@
+;[o;+	;iÈ;o;,;@
+;"flex-grow;;-;o;	;o;;iÈ;i%;o;;iÈ;i;@;"@;%@o;#;iÈ;$"number;@
+;"number;o;	;o;;iÈ;i.;o;;iÈ;i';@;"@;%@o;4;iÈ;5;6;@
+;7[o;+	;iÈ;o;,;@
+;"webkit;;-;o;	;o;;iÈ;i6;o;;iÈ;i0;@;"@;%@o;+	;iÈ;o;,;@
+;"moz;;-;o;	;o;;iÈ;i:;o;;iÈ;i7;@;"@;%@o;+	;iÈ;o;,;@
+;"	spec;;-;o;	;o;;iÈ;i?;o;;iÈ;i;;@;"@;%@;o;	;o;;iÈ;i?;o;;iÈ;i/;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iÈ;i@;o;;iÈ;i
+;@;"@o;.;iÉ;/o;	;o;;iÉ;i;o;;iÉ;i
+;@;"@;	[ ;@
+;["-ms-flex-positive;o;#;iÉ;$"number;@
+;"number;o;	;o;;iÉ;i$;o;;iÉ;i;@;"@;%@;o;	;o;;iÉ;i$;@b;@;"@;0;1;2i ;3o;	;@m;o;;iÉ;i;@;"@;0;@
+;[[o;#;iÇ;$"number;@
+;"number;o;	;o;;iÇ;i;o;;iÇ;i;@;"@;%@o;+	;iÇ;o;8
+;9"0;:@¶;@
+;;[ ;i ;o;	;o;;iÇ;i!;o;;iÇ;i ;@;"@;%@;"flex-grow;o;	;o;;iÇ;i#;o;;iÇ;i;@;"@o;
+
+;iÌ;	[ ;@
+;["&/* 2012 - flex-shrink (number) */;;o;;T;iÍ;	[o;;iÎ;	[ ;0;0;@
+;[o;+	;iÎ;o;,;@
+;"flex-shrink;;-;o;	;o;;iÎ;i';o;;iÎ;i;@;"@;%@o;#;iÎ;$"number;@
+;"number;o;	;o;;iÎ;i0;o;;iÎ;i);@;"@;%@o;4;iÎ;5;6;@
+;7[o;+	;iÎ;o;,;@
+;"webkit;;-;o;	;o;;iÎ;i8;o;;iÎ;i2;@;"@;%@o;+	;iÎ;o;,;@
+;"moz;;-;o;	;o;;iÎ;i<;o;;iÎ;i9;@;"@;%@o;+	;iÎ;o;,;@
+;"	spec;;-;o;	;o;;iÎ;iA;o;;iÎ;i=;@;"@;%@;o;	;o;;iÎ;iA;o;;iÎ;i1;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iÎ;iB;o;;iÎ;i
+;@;"@o;.;iÏ;/o;	;o;;iÏ;i;o;;iÏ;i
+;@;"@;	[ ;@
+;["-ms-flex-negative;o;#;iÏ;$"number;@
+;"number;o;	;o;;iÏ;i$;o;;iÏ;i;@;"@;%@;o;	;o;;iÏ;i$;@º;@;"@;0;1;2i ;3o;	;@Å;o;;iÏ;i;@;"@;0;@
+;[[o;#;iÍ;$"number;@
+;"number;o;	;o;;iÍ;i ;o;;iÍ;i;@;"@;%@o;+	;iÍ;o;8
+;9"1;:@¶;@
+;;[ ;i;o;	;o;;iÍ;i#;o;;iÍ;i";@;"@;%@;"flex-shrink;o;	;o;;iÍ;i%;o;;iÍ;i;@;"@o;
+
+;iÒ;	[ ;@
+;["%/* 2012 - flex-basis (number) */;;o;;T;iÓ;	[o;;iÔ;	[ ;0;0;@
+;[o;+	;iÔ;o;,;@
+;"flex-basis;;-;o;	;o;;iÔ;i&;o;;iÔ;i;@;"@;%@o;#;iÔ;$"
+width;@
+;"
+width;o;	;o;;iÔ;i.;o;;iÔ;i(;@;"@;%@o;4;iÔ;5;6;@
+;7[o;+	;iÔ;o;,;@
+;"webkit;;-;o;	;o;;iÔ;i6;o;;iÔ;i0;@;"@;%@o;+	;iÔ;o;,;@
+;"moz;;-;o;	;o;;iÔ;i:;o;;iÔ;i7;@;"@;%@o;+	;iÔ;o;,;@
+;"	spec;;-;o;	;o;;iÔ;i?;o;;iÔ;i;;@;"@;%@;o;	;o;;iÔ;i?;o;;iÔ;i/;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;iÔ;i@;o;;iÔ;i
+;@;"@o;.;iÕ;/o;	;o;;iÕ;i!;o;;iÕ;i
+;@;"@;	[ ;@
+;["-ms-flex-preferred-size;o;#;iÕ;$"
+width;@
+;"
+width;o;	;o;;iÕ;i);o;;iÕ;i#;@;"@;%@;o;	;o;;iÕ;i);@;@;"@;0;1;2i ;3o;	;@;o;;iÕ;i#;@;"@;0;@
+;[[o;#;iÓ;$"
+width;@
+;"
+width;o;	;o;;iÓ;i;o;;iÓ;i;@;"@;%@o;+	;iÓ;o;,;@
+;"	auto;;-;o;	;o;;iÓ;i$;o;;iÓ;i ;@;"@;%@;"flex-basis;o;	;o;;iÓ;i&;o;;iÓ;i;@;"@o;
+
+;iØ;	[ ;@
+;["Å/* 2009 - box-pack (start | end | center | justify)
+ * 2011 - flex-pack (start | end | center | justify)
+ * 2012 - justify-content (flex-start | flex-end | center | space-between | space-around) */;;o;;T;iÛ;	[o;
+
+;iÝ;	[ ;@
+;["/* Alt values. */;;o;=;iÞ;>0;	[ ;@
+;?o;#;iÞ;$"
+value;@
+;"
+value;o;	;o;;iÞ;i;o;;iÞ;i;@;"@;%@;"alt-value;o;	;o;;iÞ;i;o;;iÞ;i;@;"@;A0u;<U[o:"Sass::Script::Tree::Operation:
+@lineiß:@operand1o:!Sass::Script::Tree::Variable;iß:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iß:@offseti:@start_poso;;iß;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iß;i%;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iß:@valueo: Sass::Script::Value::String;
+@	;"flex-start:
+@type:string;o;	;o;;iß;i$;o;;iß;i;@;@;@u:Sass::Tree::IfNode»
+[o:"Sass::Script::Tree::Operation:
+@lineiã:@operand1o:!Sass::Script::Tree::Variable;iã:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iã:@offseti:@start_poso;;iã;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iã;i';@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iã:@valueo: Sass::Script::Value::String;
+@	;"flex-end:
+@type:string;o;	;o;;iã;i&;o;;iã;i;@;@;@u:Sass::Tree::IfNode%[o:"Sass::Script::Tree::Operation:
+@lineiç:@operand1o:!Sass::Script::Tree::Variable;iç:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;iç:@offseti:@start_poso;;iç;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;iç;i,;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;iç:@valueo: Sass::Script::Value::String;
+@	;"space-between:
+@type:string;o;	;o;;iç;i+;o;;iç;i;@;@;@u:Sass::Tree::IfNode†[o:"Sass::Script::Tree::Operation:
+@lineië:@operand1o:!Sass::Script::Tree::Variable;ië:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;ië:@offseti:@start_poso;;ië;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;ië;i+;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;ië:@valueo: Sass::Script::Value::String;
+@	;"space-around:
+@type:string;o;	;o;;ië;i*;o;;ië;i;@;@;@0[o:Sass::Tree::VariableNode;iì:@guarded0:@children[ ;
+@	:
+@expro;	;iì;o;;
+@	;"center; :identifier;o;	;o;;iì;i ;o;;iì;i;@;@;@;"alt-value;o;	;o;;iì;i ;o;;iì;i;@;@:@global0[o:Sass::Tree::VariableNode;iè:@guarded0:@children[ ;
+@	:
+@expro;	;iè;o;;
+@	;"justify; :identifier;o;	;o;;iè;i!;o;;iè;i;@;@;@;"alt-value;o;	;o;;iè;i!;o;;iè;i;@;@:@global0[o:Sass::Tree::VariableNode;iä:@guarded0:@children[ ;
+@	:
+@expro;	;iä;o;;
+@	;"end; :identifier;o;	;o;;iä;i;o;;iä;i;@;@;@;"alt-value;o;	;o;;iä;i;o;;iä;i;@;@:@global0[o:Sass::Tree::VariableNode;ià:@guarded0:@children[ ;
+@	:
+@expro;	;ià;o;;
+@	;"
+start; :identifier;o;	;o;;ià;i;o;;ià;i;@;@;@;"alt-value;o;	;o;;ià;i;o;;ià;i;@;@:@global0o;
+
+;iï;	[ ;@
+;["/* 2009 */;;o;;ið;	[ ;0;0;@
+;[o;+	;ið;o;,;@
+;"box-pack;;-;o;	;o;;ið;i$;o;;ið;i;@;"@;%@o;#;ið;$"alt_value;@
+;"alt-value;o;	;o;;ið;i0;o;;ið;i&;@;"@;%@o;4;ið;5;6;@
+;7[o;+	;ið;o;,;@
+;"webkit;;-;o;	;o;;ið;i8;o;;ið;i2;@;"@;%@o;+	;ið;o;,;@
+;"moz;;-;o;	;o;;ið;i<;o;;ið;i9;@;"@;%@o;+	;ið;o;,;@
+;"	spec;;-;o;	;o;;ið;iA;o;;ið;i=;@;"@;%@;o;	;o;;ið;iA;o;;ið;i1;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;ið;iB;o;;ið;i
+;@;"@o;
+
+;iò;	[ ;@
+;["/* 2012 */;;o;;ió;	[ ;0;0;@
+;[o;+	;ió;o;,;@
+;"justify-content;;-;o;	;o;;ió;i+;o;;ió;i;@;"@;%@o;#;ió;$"
+value;@
+;"
+value;o;	;o;;ió;i3;o;;ió;i-;@;"@;%@o;4;ió;5;6;@
+;7[
+o;+	;ió;o;,;@
+;"webkit;;-;o;	;o;;ió;i;;o;;ió;i5;@;"@;%@o;+	;ió;o;,;@
+;"moz;;-;o;	;o;;ió;i?;o;;ió;i<;@;"@;%@o;+	;ió;o;,;@
+;"ms;;-;o;	;o;;ió;iB;o;;ió;i@;@;"@;%@o;+	;ió;o;,;@
+;"o;;-;o;	;o;;ió;iD;o;;ió;iC;@;"@;%@o;+	;ió;o;,;@
+;"	spec;;-;o;	;o;;ió;iI;o;;ió;iE;@;"@;%@;o;	;o;;ió;iI;o;;ió;i4;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;ió;iJ;o;;ió;i
+;@;"@o;
+
+;iõ;	[ ;@
+;["/* 2011 (IE 10) */;;o;.;iö;/o;	;o;;iö;i;o;;iö;i
+;@;"@;	[ ;@
+;["-ms-flex-pack;o;#;iö;$"alt_value;@
+;"alt-value;o;	;o;;iö;i#;o;;iö;i;@;"@;%@;o;	;o;;iö;i#;@À;@;"@;0;1;2i ;3o;	;@Ë;o;;iö;i;@;"@;0;@
+;[[o;#;iÛ;$"
+value;@
+;"
+value;o;	;o;;iÛ;i$;o;;iÛ;i;@;"@;%@o;+	;iÛ;o;,;@
+;"flex-start;;-;o;	;o;;iÛ;i0;o;;iÛ;i&;@;"@;%@;"justify-content;o;	;o;;iÛ;i2;o;;iÛ;i;@;"@o;
+
+;iù;	[ ;@
+;["Ï/* 2009 - box-align (start | end | center | baseline | stretch)
+ * 2011 - flex-align (start | end | center | baseline | stretch)
+ * 2012 - align-items (flex-start | flex-end | center | baseline | stretch) */;;o;;T;iü;	[o;=;iþ;>0;	[ ;@
+;?o;#;iþ;$"
+value;@
+;"
+value;o;	;o;;iþ;i;o;;iþ;i;@;"@;%@;"alt-value;o;	;o;;iþ;i;o;;iþ;i;@;"@;A0u;<5[o:"Sass::Script::Tree::Operation:
+@linei :@operand1o:!Sass::Script::Tree::Variable;i :@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i :@offseti:@start_poso;;i ;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i ;i%;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i :@valueo: Sass::Script::Value::String;
+@	;"flex-start:
+@type:string;o;	;o;;i ;i$;o;;i ;i;@;@;@u:Sass::Tree::IfNode[o:"Sass::Script::Tree::Operation:
+@linei:@operand1o:!Sass::Script::Tree::Variable;i:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i:@offseti:@start_poso;;i;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i;i';@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i:@valueo: Sass::Script::Value::String;
+@	;"flex-end:
+@type:string;o;	;o;;i;i&;o;;i;i;@;@;@0[o:Sass::Tree::VariableNode;i:@guarded0:@children[ ;
+@	:
+@expro;	;i;o;;
+@	;"end; :identifier;o;	;o;;i;i;o;;i;i;@;@;@;"alt-value;o;	;o;;i;i;o;;i;i;@;@:@global0[o:Sass::Tree::VariableNode;i:@guarded0:@children[ ;
+@	:
+@expro;	;i;o;;
+@	;"
+start; :identifier;o;	;o;;i;i;o;;i;i;@;@;@;"alt-value;o;	;o;;i;i;o;;i;i;@;@:@global0o;
+
+;i;	[ ;@
+;["/* 2009 */;;o;;i	;	[ ;0;0;@
+;[o;+	;i	;o;,;@
+;"box-align;;-;o;	;o;;i	;i%;o;;i	;i;@;"@;%@o;#;i	;$"alt_value;@
+;"alt-value;o;	;o;;i	;i1;o;;i	;i';@;"@;%@o;4;i	;5;6;@
+;7[o;+	;i	;o;,;@
+;"webkit;;-;o;	;o;;i	;i9;o;;i	;i3;@;"@;%@o;+	;i	;o;,;@
+;"moz;;-;o;	;o;;i	;i=;o;;i	;i:;@;"@;%@o;+	;i	;o;,;@
+;"	spec;;-;o;	;o;;i	;iB;o;;i	;i>;@;"@;%@;o;	;o;;i	;iB;o;;i	;i2;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i	;iC;o;;i	;i
+;@;"@o;
+
+;i;	[ ;@
+;["/* 2012 */;;o;;i;	[ ;0;0;@
+;[o;+	;i;o;,;@
+;"align-items;;-;o;	;o;;i;i';o;;i;i;@;"@;%@o;#;i;$"
+value;@
+;"
+value;o;	;o;;i;i/;o;;i;i);@;"@;%@o;4;i;5;6;@
+;7[
+o;+	;i;o;,;@
+;"webkit;;-;o;	;o;;i;i7;o;;i;i1;@;"@;%@o;+	;i;o;,;@
+;"moz;;-;o;	;o;;i;i;;o;;i;i8;@;"@;%@o;+	;i;o;,;@
+;"ms;;-;o;	;o;;i;i>;o;;i;i<;@;"@;%@o;+	;i;o;,;@
+;"o;;-;o;	;o;;i;i@;o;;i;i?;@;"@;%@o;+	;i;o;,;@
+;"	spec;;-;o;	;o;;i;iE;o;;i;iA;@;"@;%@;o;	;o;;i;iE;o;;i;i0;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i;iF;o;;i;i
+;@;"@o;
+
+;i;	[ ;@
+;["/* 2011 (IE 10) */;;o;.;i;/o;	;o;;i;i;o;;i;i
+;@;"@;	[ ;@
+;["-ms-flex-align;o;#;i;$"alt_value;@
+;"alt-value;o;	;o;;i;i$;o;;i;i;@;"@;%@;o;	;o;;i;i$;@j;@;"@;0;1;2i ;3o;	;@u;o;;i;i;@;"@;0;@
+;[[o;#;iü;$"
+value;@
+;"
+value;o;	;o;;iü;i;o;;iü;i;@;"@;%@o;+	;iü;o;,;@
+;"stretch;;-;o;	;o;;iü;i(;o;;iü;i!;@;"@;%@;"align-items;o;	;o;;iü;i*;o;;iü;i;@;"@o;
+
+;i;	[ ;@
+;["¡/* 2011 - flex-item-align (auto | start | end | center | baseline | stretch)
+ * 2012 - align-self (auto | flex-start | flex-end | center | baseline | stretch) */;;o;;T;i;	[o;=;i;>0;	[ ;@
+;?o;#;i;$"
+value;@
+;"
+value;o;	;o;;i;i;o;;i;i;@;"@;%@;"value-2011;o;	;o;;i;i;o;;i;i;@;"@;A0u;<7[o:"Sass::Script::Tree::Operation:
+@linei:@operand1o:!Sass::Script::Tree::Variable;i:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i:@offseti:@start_poso;;i;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i;i%;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i:@valueo: Sass::Script::Value::String;
+@	;"flex-start:
+@type:string;o;	;o;;i;i$;o;;i;i;@;@;@u:Sass::Tree::IfNodeŽ[o:"Sass::Script::Tree::Operation:
+@linei:@operand1o:!Sass::Script::Tree::Variable;i:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i:@offseti:@start_poso;;i;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i;i';@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i:@valueo: Sass::Script::Value::String;
+@	;"flex-end:
+@type:string;o;	;o;;i;i&;o;;i;i;@;@;@0[o:Sass::Tree::VariableNode;i:@guarded0:@children[ ;
+@	:
+@expro;	;i;o;;
+@	;"end; :identifier;o;	;o;;i;i;o;;i;i;@;@;@;"value-2011;o;	;o;;i;i;o;;i;i;@;@:@global0[o:Sass::Tree::VariableNode;i:@guarded0:@children[ ;
+@	:
+@expro;	;i;o;;
+@	;"
+start; :identifier;o;	;o;;i;i ;o;;i;i;@;@;@;"value-2011;o;	;o;;i;i ;o;;i;i;@;@:@global0o;
+
+;i;	[ ;@
+;["/* 2012 */;;o;;i ;	[ ;0;0;@
+;[o;+	;i ;o;,;@
+;"align-self;;-;o;	;o;;i ;i&;o;;i ;i;@;"@;%@o;#;i ;$"
+value;@
+;"
+value;o;	;o;;i ;i.;o;;i ;i(;@;"@;%@o;4;i ;5;6;@
+;7[o;+	;i ;o;,;@
+;"webkit;;-;o;	;o;;i ;i6;o;;i ;i0;@;"@;%@o;+	;i ;o;,;@
+;"moz;;-;o;	;o;;i ;i:;o;;i ;i7;@;"@;%@o;+	;i ;o;,;@
+;"	spec;;-;o;	;o;;i ;i?;o;;i ;i;;@;"@;%@;o;	;o;;i ;i?;o;;i ;i/;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i ;i@;o;;i ;i
+;@;"@o;
+
+;i";	[ ;@
+;["/* 2011 (IE 10) */;;o;.;i#;/o;	;o;;i#;i;o;;i#;i
+;@;"@;	[ ;@
+;["-ms-flex-item-align;o;#;i#;$"value_2011;@
+;"value-2011;o;	;o;;i#;i*;o;;i#;i;@;"@;%@;o;	;o;;i#;i*;@Ö;@;"@;0;1;2i ;3o;	;@á;o;;i#;i;@;"@;0;@
+;[[o;#;i;$"
+value;@
+;"
+value;o;	;o;;i;i;o;;i;i;@;"@;%@o;+	;i;o;,;@
+;"	auto;;-;o;	;o;;i;i$;o;;i;i ;@;"@;%@;"align-self;o;	;o;;i;i&;o;;i;i;@;"@o;
+
+;i&;	[ ;@
+;["µ/* 2011 - flex-line-pack (start | end | center | justify | distribute | stretch)
+ * 2012 - align-content (flex-start | flex-end | center | space-between | space-around | stretch) */;;o;;T;i(;	[o;=;i*;>0;	[ ;@
+;?o;#;i*;$"
+value;@
+;"
+value;o;	;o;;i*;i;o;;i*;i;@;"@;%@;"value-2011;o;	;o;;i*;i;o;;i*;i;@;"@;A0u;<•[o:"Sass::Script::Tree::Operation:
+@linei+:@operand1o:!Sass::Script::Tree::Variable;i+:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i+:@offseti:@start_poso;;i+;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i+;i%;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i+:@valueo: Sass::Script::Value::String;
+@	;"flex-start:
+@type:string;o;	;o;;i+;i$;o;;i+;i;@;@;@u:Sass::Tree::IfNodeì
+[o:"Sass::Script::Tree::Operation:
+@linei/:@operand1o:!Sass::Script::Tree::Variable;i/:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i/:@offseti:@start_poso;;i/;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i/;i';@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i/:@valueo: Sass::Script::Value::String;
+@	;"flex-end:
+@type:string;o;	;o;;i/;i&;o;;i/;i;@;@;@u:Sass::Tree::IfNodeG[o:"Sass::Script::Tree::Operation:
+@linei3:@operand1o:!Sass::Script::Tree::Variable;i3:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i3:@offseti:@start_poso;;i3;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i3;i,;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i3:@valueo: Sass::Script::Value::String;
+@	;"space-between:
+@type:string;o;	;o;;i3;i+;o;;i3;i;@;@;@u:Sass::Tree::IfNode™[o:"Sass::Script::Tree::Operation:
+@linei7:@operand1o:!Sass::Script::Tree::Variable;i7:@underscored_name"
+value:@options{ :
+@name"
+value:@source_rangeo:Sass::Source::Range	:@end_poso:Sass::Source::Position;i7:@offseti:@start_poso;;i7;i:@importero: Sass::Importers::Filesystem:
+@root"*/Users/Herb/Desktop/server/hobby-site:@same_name_warningso:Set:
+@hash{ :
+@file",assets/scss/bourbon/css3/_flex-box.scss:@filename@;
+@	;o;	;o;;i7;i+;@;@;@:@operator:eq;@:@operand2o: Sass::Script::Tree::Literal	;i7:@valueo: Sass::Script::Value::String;
+@	;"space-around:
+@type:string;o;	;o;;i7;i*;o;;i7;i;@;@;@0[o:Sass::Tree::VariableNode;i8:@guarded0:@children[ ;
+@	:
+@expro;	;i8;o;;
+@	;"distribute; :identifier;o;	;o;;i8;i%;o;;i8;i;@;@;@;"value-2011;o;	;o;;i8;i%;o;;i8;i;@;@:@global0[o:Sass::Tree::VariableNode;i4:@guarded0:@children[ ;
+@	:
+@expro;	;i4;o;;
+@	;"justify; :identifier;o;	;o;;i4;i";o;;i4;i;@;@;@;"value-2011;o;	;o;;i4;i";o;;i4;i;@;@:@global0[o:Sass::Tree::VariableNode;i0:@guarded0:@children[ ;
+@	:
+@expro;	;i0;o;;
+@	;"end; :identifier;o;	;o;;i0;i;o;;i0;i;@;@;@;"value-2011;o;	;o;;i0;i;o;;i0;i;@;@:@global0[o:Sass::Tree::VariableNode;i,:@guarded0:@children[ ;
+@	:
+@expro;	;i,;o;;
+@	;"
+start; :identifier;o;	;o;;i,;i ;o;;i,;i;@;@;@;"value-2011;o;	;o;;i,;i ;o;;i,;i;@;@:@global0o;
+
+;i;;	[ ;@
+;["/* 2012 */;;o;;i<;	[ ;0;0;@
+;[o;+	;i<;o;,;@
+;"align-content;;-;o;	;o;;i<;i);o;;i<;i;@;"@;%@o;#;i<;$"
+value;@
+;"
+value;o;	;o;;i<;i1;o;;i<;i+;@;"@;%@o;4;i<;5;6;@
+;7[o;+	;i<;o;,;@
+;"webkit;;-;o;	;o;;i<;i9;o;;i<;i3;@;"@;%@o;+	;i<;o;,;@
+;"moz;;-;o;	;o;;i<;i=;o;;i<;i:;@;"@;%@o;+	;i<;o;,;@
+;"	spec;;-;o;	;o;;i<;iB;o;;i<;i>;@;"@;%@;o;	;o;;i<;iB;o;;i<;i2;@;"@;%@;o;&;'IC;({ ;)[ ;*{ ;"prefixer;o;	;o;;i<;iC;o;;i<;i
+;@;"@o;
+
+;i>;	[ ;@
+;["/* 2011 (IE 10) */;;o;.;i?;/o;	;o;;i?;i;o;;i?;i
+;@;"@;	[ ;@
+;["-ms-flex-line-pack;o;#;i?;$"value_2011;@
+;"value-2011;o;	;o;;i?;i);o;;i?;i;@;"@;%@;o;	;o;;i?;i);@B	;@;"@;0;1;2i ;3o;	;@M	;o;;i?;i;@;"@;0;@
+;[[o;#;i(;$"
+value;@
+;"
+value;o;	;o;;i(;i!;o;;i(;i;@;"@;%@o;+	;i(;o;,;@
+;"stretch;;-;o;	;o;;i(;i*;o;;i(;i#;@;"@;%@;"align-content;o;	;o;;i(;i,;o;;i(;i;@;"@;@
+;o;	;o;;i;i;o;;i;i;@;"@
