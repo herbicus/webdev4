@@ -1,0 +1,814 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+
+
+
+// bower:scss
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
+
+// MY IMPORTS
+
+// @import "layout";
+
+// @import "app/..styles/vairables";
+
+* {
+    -webkit-box-sizing: border-box; 
+       -moz-box-sizing: border-box; 
+            box-sizing: border-box; 
+}
+
+@font-face {
+    font-family: 'manhattan_itc_stdregular';
+    src: url('../fonts/manhattanitcstd-webfont.eot');
+    src: url('../fonts/manhattanitcstd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/manhattanitcstd-webfont.woff') format('woff'),
+         url('../fonts/manhattanitcstd-webfont.ttf') format('truetype'),
+         url('../fonts/manhattanitcstd-webfont.svg#manhattan_itc_stdregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'socicon';
+    src: url('../fonts/socicon-webfont.eot');
+    src: url('../fonts/socicon-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/socicon-webfont.woff') format('woff'),
+         url('../fonts/socicon-webfont.ttf') format('truetype'),
+         url('../fonts/socicon-webfont.svg#sociconregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// COlORS
+
+$tigerRed: #bf4d28;
+$tigerYellow: #e6ac27;
+$tigerCream: #f6f7bd;
+$tigerGreen: #80bca3;
+$tigerBrown: #655643;
+
+$muteAqua: #1abc9c;
+$aqua: #16a085;
+$muteGreen: #2ecc71;
+$green: #27ae60;
+$muteBlue: #3498db;
+$blue: #2980b9;
+$mutePurple: #9b59b6;
+$purple: #8e44ad;
+$muteNavy: #34495e;
+$navy: #2c3e50;
+$yellow: #f1c40f;
+$orange: #f39c12;
+$carrot: #e67e22;
+$pumpkin: #d35400;
+$brightRed: #e74c3c;
+$deepRed: #c0392b;
+$clouds: #ecf0f1;
+$cream: #fafafa;
+$silver: #bdc3c7;
+$muteGrey: #95a5a6;
+$grey: #7f8c8d;
+$charcoal: #444444;
+
+@mixin shadow-border($color) {
+  -webkit-box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+          box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+}
+
+@mixin fade-callout($value, $color, $font-color){
+   background: rgba(0, 0, 0, $value);
+  -webkit-box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+          box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    color: $font-color;
+}
+
+@mixin bg-contain {
+  background-position: center, center;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+       -o-background-size: contain;
+          background-size: contain;
+}
+
+@mixin bg-cover {
+  background-position: center, center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+@mixin grayscale-hover {
+  -webkit-transition: all 0.3s ease-in-out; 
+  -moz-transition: all 0.3s ease-in-out; 
+  -ms-transition: all 0.3s ease-in-out; 
+  -o-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+  &:hover {
+    -webkit-filter: grayscale(100%);
+      cursor: pointer;
+  }
+}
+
+@mixin fade-hover {
+  -webkit-transition: all 0.3s ease-in-out; 
+  -moz-transition: all 0.3s ease-in-out; 
+  -ms-transition: all 0.3s ease-in-out; 
+  -o-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+// MY CONTENT
+a {
+  -webkit-transition: all 0.3s ease-in-out; 
+  -moz-transition: all 0.3s ease-in-out; 
+  -ms-transition: all 0.3s ease-in-out; 
+  -o-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out; 
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Space out content a bit */
+html,
+body {
+  font-size: 100%;
+  width: 100%;
+  height: 100%;  
+}
+
+body {
+  background: $tigerGreen;
+  color: $charcoal;
+  padding: 0;
+  margin: 0;
+  font-family: "Georgia";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  cursor: default; 
+}
+
+// MY STUFF =================================================
+
+
+// SIMPLIFIED GRID
+
+.whole {
+   @extend .col-md-12;
+   @extend .col-sm-12;  
+}
+
+.two-col {
+    @extend .col-md-6;
+    @extend .col-sm-6;
+}
+
+.three-col {
+   @extend .col-md-4;
+   @extend .col-sm-4; 
+}
+
+.four-col {
+    @extend .col-md-3;
+    @extend .col-sm-3;
+}
+
+// 4 columns
+.l-sidebar {
+    @extend .col-md-4;
+    @extend .col-sm-4;
+}
+
+// 8 columns
+.l-content {
+    @extend .col-md-8;
+    @extend .col-sm-8;
+}
+
+.row {
+    padding: 1em 0;
+    @include clearfix();
+}
+
+.l-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5rem; //960px
+  *zoom: 1;
+  padding: 2em 0;
+  @include clearfix();
+}
+
+.l-columns {
+    padding-top: 0.9375rem;
+    padding-bottom: 0.9375rem;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    float: left !important;
+    @media screen and (max-width: 768px){
+      width: 100%;
+      float: left;
+      display: block;
+    } 
+}
+
+
+// loading screen
+#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+}
+#loading {
+    width: 50px;
+    height: 57px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -28px 0 0 -25px;
+}
+
+.tiger-hr {
+  background: url("../images/hr.png")no-repeat center center;
+  -webkit-background-size: cover; 
+  -o-background-size: cover; 
+  background-size: cover;
+  height: 4em;
+}
+
+.copyright {
+  background: url("../images/copy.png")no-repeat bottom center;
+  -webkit-background-size: cover; 
+  -o-background-size: cover; 
+  background-size: cover;
+  height: 1em;
+  margin-top: 5em;
+}
+
+.show-me {
+    border: 1px solid black;
+    color: $cream;
+    text-align: center;
+}
+
+h1,h2,h3,h4,
+h5,h6,p {
+  text-shadow: 0 2px 2px $tigerRed;
+  font-family: 'manhattan_itc_stdregular';
+  color: $cream;
+}
+
+// LAYOUT ======================================
+
+.top-navigation {
+  .l-header-title {
+    background: url("../images/slash.png")no-repeat center center;
+    -webkit-background-size: contain; 
+    -o-background-size: contain; 
+    background-size: contain;
+    height: 10em;
+    h1 {
+      font-size: 6em;
+      letter-spacing: 2px; 
+      @media screen and (max-width: 768px){
+        font-size: 3em;
+      } 
+    }
+    h2 {
+      letter-spacing: 2px; 
+      font-size: 3em;
+      @media screen and (max-width: 768px){
+        font-size: 2em;
+      }
+    }
+      @media screen and (max-width: 768px){
+        height: 5em;
+        background-position: center bottom; 
+      }
+  }
+  .l-address {
+    ul {
+      padding-right: 10%;
+      margin-top: -10.5%;
+      float: right;
+      @media screen and (max-width: 768px){
+        float: left !important;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 5em;;
+      } 
+      li {
+        font-family: 'manhattan_itc_stdregular';
+        list-style: none;
+        font-size: 1.5em;
+        color: $cream;
+        letter-spacing: 5px;
+        line-height: 30px;
+        text-shadow: 0 2px 2px $tigerRed; 
+        // @media screen and (max-width: 768px){
+        //   padding: 0;
+        //   margin: 0;  
+        // } 
+      }
+  }
+  
+}
+  .ham-nav {
+    z-index: 1; 
+    left: 75%;
+    bottom: 75%; 
+    position: fixed;
+    -webkit-transition: all 0.3s ease-in-out; 
+    -moz-transition: all 0.3s ease-in-out; 
+    -ms-transition: all 0.3s ease-in-out; 
+    -o-transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out;
+    @media screen and (max-width: 768px){
+      // left: 60%;
+      left: 70%;
+      max-width: 50%;
+      width: 25%;
+      
+    } 
+    &:hover {
+      cursor: pointer;
+      -webkit-filter: grayscale(100%);
+    }
+
+  }
+}
+
+#nav-spirits {
+  background: url("../images/bottle.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+}
+
+#nav-menu {
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  background: url("../images/cheers.png")no-repeat center center;
+}
+
+#nav-about {
+  background: url("../images/slash.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;  
+}
+
+#nav-rsvp {
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  background: url("../images/phone.png")no-repeat center center;
+}
+
+.modal-content {
+  padding: 1%;
+  // text-align: center;
+  background: transparent;
+  background: $tigerCream;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  
+  ul {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    li {
+      padding: 1.5em 0;
+      font-size: 1.25em; 
+      background: $tigerCream;
+      border-top: 3px solid $tigerBrown;
+      border-left: 3px solid $tigerBrown;
+      border-right: 3px solid $tigerBrown;
+      &:last-child {
+        border-bottom: 3px solid $tigerBrown;
+      }
+      -webkit-transition: all 0.3s ease-in-out; 
+      -moz-transition: all 0.3s ease-in-out; 
+      -ms-transition: all 0.3s ease-in-out; 
+      -o-transition: all 0.3s ease-in-out; 
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background: $tigerGreen; 
+      }
+      a {
+        font-family: 'manhattan_itc_stdregular';
+        color: $tigerYellow;
+        padding-left: 10%;
+        &:hover {
+          color: $tigerRed;
+        }
+      }
+    }
+  }
+}
+
+.l-top-section {
+  padding-top: 3em;
+  .pinup {
+    background: url("../images/hero-image.png")no-repeat center center;
+    -webkit-background-size: contain; 
+    -o-background-size: contain; 
+    background-size: contain;
+    height: 20em;
+    -webkit-transform: rotate(-9deg);
+    -moz-transform: rotate(-9deg);
+    -ms-transform: rotate(-9deg);
+    -o-transform: rotate(-9deg);
+    transform: rotate(-9deg);
+    // -webkit-box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    //         box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    -webkit-transition: all 0.3s ease-in-out; 
+    -moz-transition: all 0.3s ease-in-out; 
+    -ms-transition: all 0.3s ease-in-out; 
+    -o-transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out; 
+    @media screen and (max-width: 768px){
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      
+    } 
+  }
+
+
+  .headline {
+    background: url("../images/outside.jpg")no-repeat center center;
+    -webkit-background-size: contain; 
+    -o-background-size: contain; 
+    background-size: contain;
+    height: 20em;
+    -webkit-transform: rotate(7deg);
+    -moz-transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    -o-transform: rotate(7deg);
+    transform: rotate(7deg);
+    // -webkit-box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    //         box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    -webkit-transition: all 0.3s ease-in-out; 
+    -moz-transition: all 0.3s ease-in-out; 
+    -ms-transition: all 0.3s ease-in-out; 
+    -o-transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out; 
+    @media screen and (max-width: 768px){
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.l-hero-section {
+
+  .four-col {
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+      -webkit-box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+              box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    width: 23%;
+    margin: 1%;
+    -webkit-transition: all 0.3s ease-in-out; 
+    -moz-transition: all 0.3s ease-in-out; 
+    -ms-transition: all 0.3s ease-in-out; 
+    -o-transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out; 
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    } 
+  }
+
+  h2 {
+    color: $cream;
+    text-shadow: 0 2px 2px $tigerRed;
+    padding-top: 2em;
+    letter-spacing: 2px; 
+    position: relative;
+    bottom: 6.5em;
+    text-decoration: underline;
+    @media screen and (max-width: 768px){
+      bottom: 0;
+    }
+  }
+  .menu-nav {
+    text-align: center;
+    padding-top: 5em;
+    .icon {
+      width: 50px;
+      height: 50px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 1em;
+      @include clearfix();
+      @media screen and (max-width: 768px){
+        width: 100%;
+        float: left;
+        display: block;
+      }
+    }
+  }
+}
+
+#spirits {
+  background: url("../images/bottle.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  @media screen and (max-width: 768px){
+    width: 100%;
+    float: left;
+    display: block;
+    -webkit-border-radius: 25px; 
+    border-radius: 25px; 
+  }
+}
+
+#menu {
+  background: url("../images/cheers.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  @media screen and (max-width: 768px){
+    width: 100%;
+    float: left;
+    display: block;
+    -webkit-border-radius: 25px; 
+    border-radius: 25px; 
+  }
+}
+
+#about {
+  background: url("../images/slash.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  @media screen and (max-width: 768px){
+    width: 100%;
+    float: left;
+    display: block;
+    -webkit-border-radius: 25px; 
+    border-radius: 25px; 
+  }
+}
+
+#rsvp {
+  background: url("../images/phone.png")no-repeat center center;
+  -webkit-background-size: contain; 
+  -o-background-size: contain; 
+  background-size: contain;
+  @media screen and (max-width: 768px){
+    width: 100%;
+    float: left;
+    display: block;
+    -webkit-border-radius: 25px; 
+    border-radius: 25px; 
+  }
+}
+
+// DISPLAYS
+
+.spirits-display {
+  background: url("../images/spirits-menu.jpg")no-repeat top center;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+  z-index: -1; 
+}
+
+.menu-display {
+  @extend .spirits-display;
+  background: url("../images/dinner-menu.jpg")no-repeat top center;
+}
+
+.about-display {
+  @extend .menu-display;
+  background: url("../images/about-menu.jpg")no-repeat top center;
+}
+
+.rsvp-display {
+  @extend .menu-display;
+  background: url("../images/rsvp-menu.jpg")no-repeat top center;
+}
+
+
+.carousel-inner{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    -webkit-transition: all 0.3s ease-in-out; 
+    -moz-transition: all 0.3s ease-in-out; 
+    -ms-transition: all 0.3s ease-in-out; 
+    -o-transition: all 0.3s ease-in-out; 
+    transition: all 0.3s ease-in-out; 
+    &:hover {
+      cursor: pointer;
+      -webkit-filter: grayscale(100%);
+      
+    }
+  }
+}
+
+// DISPLAY CONTAINER
+.l-hero {
+  height: 27em;
+  @media screen and (max-width: 768px){
+    height: 16em;
+  }
+  
+  .l-display {
+    height: 22em;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden; 
+  }
+  
+  @media screen and (max-width: 768px){
+    width: 100%;
+    -webkit-background-size: contain; 
+    -o-background-size: contain; 
+    background-size: contain; 
+  }
+}
+
+footer {
+  padding: 2em 0;
+  .whole {
+    ul {
+      list-style: none;
+      text-align: center;
+      li {
+        list-style: none;
+        display: inline-block;
+      }
+    }
+    ul li a{
+      font-family: 'socicon';
+      margin: 0 2em;
+      color: $tigerCream;
+      font-size: 3em;
+      padding: 3%;
+      -webkit-border-radius: 50%; 
+      border-radius: 50%; 
+      -webkit-box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+              box-shadow: 0px 0px 1px 1px $tigerRed, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+      -webkit-transition: all 0.3s ease-in-out; 
+      -moz-transition: all 0.3s ease-in-out; 
+      -ms-transition: all 0.3s ease-in-out; 
+      -o-transition: all 0.3s ease-in-out; 
+      transition: all 0.3s ease-in-out;
+      @media screen and (max-width: 768px){
+        margin: 15px;
+      }
+      &:hover {
+        cursor: pointer;
+        color: $tigerRed;
+        -webkit-box-shadow: 0px 0px 1px 1px $tigerCream, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+                box-shadow: 0px 0px 1px 1px $tigerCream, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+        text-shadow: 0 2px 2px $tigerCream;
+        text-decoration: none;
+      } 
+
+    }
+  }
+}
+
+
+
+// END MY STUFF =============================================
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+// .header,
+// .marketing,
+// .footer {
+//     padding-left: 15px;
+//     padding-right: 15px;
+// }
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+
+    /* Make the masthead heading the same height as the navigation */
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+        padding-bottom: 19px;
+        
+    }
+}
+
+/* Custom page footer */
+// .footer {
+//     padding-top: 19px;
+//     color: #777;
+//     border-top: 1px solid #e5e5e5;
+// }
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+    }
+}
+
+/* Supporting marketing content */
+.marketing {
+    margin: 40px 0;
+    p + h4 {
+        margin-top: 28px;
+    }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+
+// /* Large desktop */
+// @media (min-width: 1200px) { ... }
+ 
+// /* Portrait tablet to landscape and desktop */
+// @media (min-width: 768px) and (max-width: 979px) { ... }
+ 
+// /* Landscape phone to portrait tablet */
+// @media (max-width: 767px) { ... }
+ 
+// /* Landscape phones and down */
+// @media (max-width: 480px) { ... }
