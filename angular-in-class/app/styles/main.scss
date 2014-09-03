@@ -1,0 +1,56 @@
+// bower:scss
+// endbower
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    counter-reset: heading-counter;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 960px;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding-top: 5em; 
+    h3 {
+        counter-increment: heading-counter;
+        &:before {
+            content: counter(heading-counter) '. ';
+        }
+    }
+
+    ul {
+        list-style: none;
+        font-size: 2em;
+        letter-spacing: 5px; 
+        font-variant: small-caps; 
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+    }
+
+    &.south-park {
+        figure {
+            float: left;
+             
+        }
+    }
+    .bubble {
+        border: solid 2px #f60;
+        background: #ffc;
+        padding: 20px;
+        margin: 0 auto;
+        display: inline-block;
+
+    }
+
+    .date {
+        display: block;
+        font-style: italic;
+        font-size: 80%;
+    }
+}
